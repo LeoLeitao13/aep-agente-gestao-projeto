@@ -27,7 +27,12 @@ class CsvWriterFilter(BaseFilter):
             writer = csv.writer(fh)
             writer.writerow(self.HEADERS)
             for ind in context.indicators:
-                value = "" if isinstance(ind.value, dict) else ind.value
+                if ind.value is None:
+                    value = "N/A"
+                elif isinstance(ind.value, dict):
+                    value = ""
+                else:
+                    value = ind.value
                 detail_source = ind.detail if ind.detail is not None else (
                     ind.value if isinstance(ind.value, dict) else None
                 )

@@ -1,497 +1,751 @@
-"""Gera o documento final da Entrega 2 (.docx) — AEP 8S.
+"""Preenche o Modelo_Entrega2.docx original, preservando logo, estilos e layout.
 
-Segue a estrutura do `Modelo_Entrega2.docx`, com a seção 3 focada em 1 agente
-(Agente de Gestão de Projetos), já pré-preenchida com os dados reais coletados
-do board TR / Sprint 7 e dos 6 cenários de teste automatizados.
+NÃO gera nada do zero — abre o modelo oficial e apenas:
+  * substitui texto dos placeholders [ ... ] pelo conteúdo real do agente;
+  * preenche as tabelas vazias do template (Identificação, Casos, Métricas, Consolidação);
+  * insere os gráficos nos pontos indicados pelo próprio modelo;
+  * remove os blocos dos Agentes 2 a 5 (escopo acordado com o professor: 1 agente).
 
-Campos ainda dependentes da equipe (nomes, ODS, repo) estão marcados com
-colchetes `[ ... ]` para edição rápida.
-
-Saída: `entrega_2/Entrega2_AgenteGestao.docx`
+Saída: entrega_2/Entrega2_AgenteGestao.docx
 """
 from __future__ import annotations
 
 import csv
 import json
+import shutil
+from copy import deepcopy
 from datetime import datetime
 from pathlib import Path
 
 from docx import Document
-from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.shared import Cm, Pt, RGBColor
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+from docx.shared import Cm, Pt
+from docx.text.paragraph import Paragraph
 
 ROOT = Path(__file__).resolve().parents[1]
+TEMPLATE = Path("/Users/leoleitao31/Documents/AEP/Modelo_Entrega2.docx")
 GRAFICOS = ROOT / "entrega_2" / "graficos"
 OUT = ROOT / "entrega_2" / "Entrega2_AgenteGestao.docx"
 OUT.parent.mkdir(parents=True, exist_ok=True)
 
 
 # =====================================================================
-# Utilitários de formatação
+# Helpers de manipulação do .docx
 # =====================================================================
-def set_cell_shading(cell, color_hex: str) -> None:
-    from docx.oxml.ns import nsdecls
-    from docx.oxml import parse_xml
-    cell._tc.get_or_add_tcPr().append(
-        parse_xml(rf'<w:shd {nsdecls("w")} w:fill="{color_hex}"/>')
-    )
+def replace_paragraph_text(p: Paragraph, text: str) -> None:
+    """Substitui o texto do parágrafo, preservando o estilo do próprio parágrafo."""
+    for r in list(p.runs):
+        r._element.getparent().remove(r._element)
+    p.add_run(text)
 
 
-def add_heading_pt(doc: Document, text: str, level: int) -> None:
-    h = doc.add_heading(text, level=level)
-    for run in h.runs:
-        run.font.color.rgb = RGBColor(0x1F, 0x2A, 0x44)
+def set_cell_text(cell, text: str) -> None:
+    """Escreve texto na célula limpando qualquer conteúdo anterior."""
+    cell.text = str(text)
 
 
-def add_bullet(doc: Document, text: str) -> None:
-    doc.add_paragraph(text, style="List Bullet")
+def set_cell_text_keep_format(cell, text: str) -> None:
+    """Como set_cell_text, mas preserva a formatação (bold/font/size/cor) do
+    primeiro run da célula — necessário para substituir texto de cabeçalho
+    sem quebrar a formatação visual das demais colunas."""
+    runs = [r for p in cell.paragraphs for r in p.runs]
+    bold = runs[0].bold if runs else None
+    size = runs[0].font.size if runs else None
+    font_name = runs[0].font.name if runs else None
+    color = (runs[0].font.color.rgb
+             if runs and runs[0].font.color and runs[0].font.color.rgb else None)
+    cell.text = str(text)
+    for p in cell.paragraphs:
+        for r in p.runs:
+            if bold is not None:
+                r.bold = bold
+            if size is not None:
+                r.font.size = size
+            if font_name:
+                r.font.name = font_name
+            if color is not None:
+                r.font.color.rgb = color
 
 
-def add_table(doc: Document, headers: list[str], rows: list[list[str]]) -> None:
-    table = doc.add_table(rows=1, cols=len(headers))
-    table.style = "Light Grid Accent 1"
-    hdr_cells = table.rows[0].cells
-    for i, h in enumerate(headers):
-        hdr_cells[i].text = h
-        for p in hdr_cells[i].paragraphs:
-            for r in p.runs:
-                r.bold = True
-        set_cell_shading(hdr_cells[i], "1F2A44")
-        for p in hdr_cells[i].paragraphs:
-            for r in p.runs:
-                r.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
-    for row in rows:
-        cells = table.add_row().cells
-        for i, v in enumerate(row):
-            cells[i].text = str(v)
-            cells[i].vertical_alignment = WD_ALIGN_VERTICAL.TOP
+def set_table_widths_cm(table, widths_cm: list[float]) -> None:
+    """Define a largura (cm) de cada coluna em TODAS as linhas da tabela."""
+    for row in table.rows:
+        for i, cell in enumerate(row.cells):
+            if i < len(widths_cm):
+                cell.width = Cm(widths_cm[i])
 
 
-def add_image(doc: Document, path: Path, width_cm: float = 15.0, caption: str = "") -> None:
-    p = doc.add_paragraph()
+def iter_body_items(doc):
+    """Yields (element, Paragraph|Table) em ordem de documento."""
+    body = doc.element.body
+    paragraphs_by_elem = {p._element: p for p in doc.paragraphs}
+    tables_by_elem = {t._element: t for t in doc.tables}
+    for el in body.iterchildren():
+        if el in paragraphs_by_elem:
+            yield el, paragraphs_by_elem[el]
+        elif el in tables_by_elem:
+            yield el, tables_by_elem[el]
+
+
+def find_paragraph(doc, text_fragment: str) -> Paragraph | None:
+    for p in doc.paragraphs:
+        if text_fragment in p.text:
+            return p
+    return None
+
+
+def insert_paragraph_after(prev_paragraph: Paragraph, text: str = "", *, align=None, size: int | None = None, italic=False, bold=False) -> Paragraph:
+    """Cria um novo parágrafo logo após `prev_paragraph` e devolve-o."""
+    new_p_elem = OxmlElement("w:p")
+    prev_paragraph._element.addnext(new_p_elem)
+    new_para = Paragraph(new_p_elem, prev_paragraph._parent)
+    if align is not None:
+        new_para.alignment = align
+    if text:
+        run = new_para.add_run(text)
+        if size:
+            run.font.size = Pt(size)
+        if italic:
+            run.italic = True
+        if bold:
+            run.bold = True
+    return new_para
+
+
+def replace_placeholder_with_image(doc, marker: str, image_path: Path, *, caption: str, width_cm: float = 14.5) -> None:
+    """Encontra o parágrafo-placeholder e substitui por imagem centralizada + legenda."""
+    p = find_paragraph(doc, marker)
+    if not p:
+        return
+    # limpa texto e insere imagem
+    for r in list(p.runs):
+        r._element.getparent().remove(r._element)
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = p.add_run()
-    run.add_picture(str(path), width=Cm(width_cm))
-    if caption:
-        cap = doc.add_paragraph(caption)
-        cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        for r in cap.runs:
-            r.italic = True
-            r.font.size = Pt(9)
+    p.add_run().add_picture(str(image_path), width=Cm(width_cm))
+    # legenda ABNT abaixo
+    cap = insert_paragraph_after(p, caption, align=WD_ALIGN_PARAGRAPH.CENTER, size=10, italic=True)
+    _ = cap
+
+
+def delete_elements_between(doc, start_marker: str, end_marker: str) -> int:
+    """Remove todos os elementos entre o parágrafo contendo start_marker
+    (incluído) e o parágrafo contendo end_marker (excluído).
+    Devolve a quantidade de elementos removidos."""
+    items = list(iter_body_items(doc))
+    start = end = None
+    for i, (_, obj) in enumerate(items):
+        if isinstance(obj, Paragraph):
+            if start is None and start_marker in obj.text:
+                start = i
+            elif start is not None and end is None and end_marker in obj.text:
+                end = i
+                break
+    if start is None or end is None:
+        raise RuntimeError(f"Marcadores não encontrados: {start_marker!r} / {end_marker!r}")
+    removed = 0
+    for el, _ in items[start:end]:
+        el.getparent().remove(el)
+        removed += 1
+    return removed
+
+
+def delete_table_rows(table, keep_indices: list[int]) -> None:
+    """Mantém apenas as linhas cujos índices estão em keep_indices."""
+    rows = list(table.rows)
+    for i, row in enumerate(rows):
+        if i not in keep_indices:
+            row._element.getparent().remove(row._element)
 
 
 # =====================================================================
-# Carga de dados reais
+# Carga dos dados reais
 # =====================================================================
 def load_indicadores() -> dict:
     path = ROOT / "data" / "output" / "indicadores_tr_sprint7.csv"
     out: dict = {}
     with path.open(encoding="utf-8") as fh:
         for row in csv.DictReader(fh):
-            val = row["valor"]
             try:
-                val = float(val) if val else None
+                val = float(row["valor"]) if row["valor"] else None
             except ValueError:
-                pass
+                val = row["valor"]
             detail = json.loads(row["detalhe"]) if row["detalhe"] else None
             out[row["indicador"]] = {"value": val, "unit": row["unidade"], "detail": detail}
     return out
 
 
 def load_metricas() -> list[dict]:
+    """Lê o CSV de métricas e devolve ordenado por nome do cenário (C1, C2, …)."""
     path = ROOT / "data" / "output" / "metricas_entrega2.csv"
     with path.open(encoding="utf-8") as fh:
-        return list(csv.DictReader(fh))
+        rows = list(csv.DictReader(fh))
+    return sorted(rows, key=lambda r: r["cenario"])
 
 
-CENARIO_DESC = {
+CENARIOS_INFO = {
     "C1_tipico_sprint_feliz": (
-        "Sprint típica sem retrabalho: 4 tarefas, 3 concluídas e 1 em andamento.",
-        "planejadas=4, concluídas=3, canceladas=0, ajuste=0, retrabalho=0%, est=150h, real=138h",
+        "Sprint típica sem retrabalho (4 tarefas; 3 concluídas e 1 em andamento).",
+        "planejadas=4; concluídas=3; canceladas=0; ajuste=0; retrabalho=0%; est=150h; real=138h",
     ),
     "C2_sprint_com_retrabalho": (
-        "Sprint com retrabalho relevante: 4 tarefas concluídas, 2 marcadas como ajuste.",
-        "concluídas=4, ajuste=2, taxa_retrabalho=50%, horas conservadas",
+        "Sprint com retrabalho relevante (4 concluídas, 2 marcadas como ajuste).",
+        "concluídas=4; ajuste=2; taxa_retrabalho=50%; horas conservadas",
     ),
     "C3_tarefas_canceladas_e_backlog": (
-        "Sprint com tarefas canceladas e itens de backlog (To Do/Backlog).",
-        "planejadas=4, concluídas=1, canceladas=1, horas estimadas=85h, realizadas=39h",
+        "Sprint com tarefas canceladas e itens de backlog (To Do / Backlog).",
+        "planejadas=4; concluídas=1; canceladas=1; est=85h; real=39h",
     ),
     "C4_status_pt_br_misto": (
-        "Teste de borda: status em PT-BR com acentos, variações de caixa (Concluído / Concluída / em andamento / A Fazer) e detecção de ajuste via label 'hotfix'.",
-        "concluídas=2, ajuste=1, taxa_retrabalho=50%, horas=64h",
+        "Borda: status em PT-BR com acentos e caixas variadas (Concluído/Concluída/em andamento/A Fazer) e detecção de ajuste via label 'hotfix'.",
+        "concluídas=2; ajuste=1; taxa_retrabalho=50%; est=64h",
     ),
     "C5_borda_vazio": (
-        "Teste de borda: export vazio (zero tarefas) — valida divisão por zero e saída consistente.",
-        "todos os contadores=0, taxa_retrabalho=0%, horas=0h, nenhum erro",
+        "Borda: export vazio (zero tarefas) — valida consistência em 0/0 (indicador N/A).",
+        "todos os contadores=0; taxa_retrabalho=N/A; horas=0h; sem erro",
     ),
     "C6_meta_1000h_aderente": (
-        "Cenário aderente à meta de 1.000h: 10 tarefas de 100h cada, concluídas, 950h realizadas.",
-        "planejadas=10, concluídas=10, horas_estimadas=1000h (aderente), realizadas=950h",
+        "Cenário aderente à meta de 1.000h (10 tarefas × 100h cada, concluídas, 950h realizadas).",
+        "planejadas=10; concluídas=10; est=1000h (aderente); real=950h",
+    ),
+    "C7_jira_real_anonimizado": (
+        "Execução contra o export REAL do Jira (Sprint 7 do board TR; 33 tarefas; 6 integrantes anonimizados em Dev1..Dev6).",
+        "planejadas=33; concluídas=3; canceladas=0; ajuste=1; retrabalho=33,33%; est=0h; real=7,92h",
     ),
 }
 
 
 # =====================================================================
-# Montagem do documento
+# Preenchimento, seção por seção
 # =====================================================================
-def build_document() -> Path:
-    doc = Document()
-
-    # --------- estilo base
-    style = doc.styles["Normal"]
-    style.font.name = "Calibri"
-    style.font.size = Pt(11)
-
-    # --------- Capa e Identificação
-    title = doc.add_paragraph()
-    title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r = title.add_run("Entrega 2 — Testes, Estatísticas e Demonstração do Agente")
-    r.bold = True
-    r.font.size = Pt(18)
-    r.font.color.rgb = RGBColor(0x1F, 0x2A, 0x44)
-
-    sub = doc.add_paragraph()
-    sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r = sub.add_run("Arquitetura de Software · Gestão de Projetos · Tecnologias Emergentes")
-    r.italic = True
-    r.font.size = Pt(12)
-
-    doc.add_paragraph()
-
-    add_heading_pt(doc, "Capa e Identificação", level=1)
-    identificacao = [
-        ("Título do projeto/ecossistema de agentes", "Escola de TI — SAUF BR (Agente de Gestão de Projetos)"),
-        ("Curso/Disciplina/Turma", "Engenharia de Software — 8º Semestre · AEP 8S-1B-1"),
-        ("Integrantes da equipe (3) e papéis", "[ Integrante 1 — papel ] · [ Integrante 2 — papel ] · [ Integrante 3 — papel ]"),
-        ("ODS escolhida", "[ Ex.: ODS 4 — Educação de Qualidade ]"),
-        ("Link/repositório da implementação", "[ URL do repositório Git ]"),
-        ("Data", datetime.now().strftime("%d/%m/%Y")),
+def preencher_identificacao(doc) -> None:
+    """Tabela 0 do modelo — primeira tabela após 'Capa e Identificação'."""
+    t = doc.tables[0]
+    valores = [
+        "Escola de TI — SAUF BR (Agente de Gestão de Projetos)",
+        "Engenharia de Software — 8º Semestre · Turma A",
+        (
+            "Karen Tanaka - 23026540-2 – Teste e QA\n"
+            "Leonardo Leitão Souza - 23020085-2 - Desenvolvedor\n"
+            "Antonio Ferreira de Lima - 23038173-2 - PO"
+        ),
+        "ODS 8 — Trabalho Decente e Crescimento Econômico",
+        "https://github.com/LeoLeitao13/aep-agente-gestao-projeto",
+        datetime.now().strftime("%d/%m/%Y"),
     ]
-    add_table(doc, ["Campo", "Valor"], identificacao)
-    doc.add_paragraph()
+    for i, v in enumerate(valores):
+        set_cell_text(t.rows[i].cells[1], v)
 
-    nota = doc.add_paragraph()
-    nr = nota.add_run(
-        "Observação sobre o escopo: na Entrega 1 havia previsão de um ecossistema "
-        "de 5 agentes; após replanejamento com o professor e a equipe, o escopo foi "
-        "concentrado em 1 (um) agente — o Agente de Gestão de Projetos — com "
-        "profundidade reforçada em arquitetura, testes e análise crítica. Esta "
-        "entrega apresenta esse agente de forma completa."
-    )
-    nr.italic = True
-    nr.font.size = Pt(10)
 
-    doc.add_page_break()
-
-    # --------- 1. Resumo Executivo
-    add_heading_pt(doc, "1. Resumo Executivo", level=1)
-    doc.add_paragraph(
+def preencher_resumo_executivo(doc) -> None:
+    p = find_paragraph(doc, "Em até 10 linhas")
+    replace_paragraph_text(p, (
         "Esta entrega apresenta os resultados dos testes e evidências do Agente de "
         "Gestão de Projetos, implementado em Python sob o estilo arquitetural "
         "Pipe-and-Filter e combinando os padrões Controller (GRASP), Factory Method, "
-        "Adapter e Strategy (GoF). O agente consome exports do Jira (.csv ou .docx), "
+        "Adapter e Strategy (GoF). O agente consome exports do Jira (.csv/.docx), "
         "normaliza as tarefas e produz um CSV padronizado com 8 indicadores de "
-        "gestão (tarefas planejadas/concluídas/canceladas/ajuste, taxa de "
-        "retrabalho, horas estimadas/realizadas, horas por integrante). "
-        "Foram executados 6 cenários automatizados (casos típicos + bordas) "
-        "obtendo 100% de taxa de acerto e tempo médio inferior a 4 ms por execução. "
-        "Além dos cenários sintéticos, o pipeline foi validado contra o dado real "
-        "do board TR (Sprint 7, 33 tarefas, 7 integrantes) com todos os indicadores "
-        "batendo com a contagem visual do board. A principal conclusão é que a "
-        "arquitetura modular adotada atendeu plenamente aos requisitos funcionais "
-        "e evidenciou, no dado real, uma lacuna de processo (ausência de "
-        "estimativa de horas pelo time) — ilustrando que o próprio agente passa a "
-        "funcionar como instrumento de melhoria contínua."
-    )
+        "gestão. Foram executados 7 cenários automatizados — 2 típicos, 4 de borda e 1 contra o export real do Jira (Sprint 7 do board TR, 33 tarefas, 6 integrantes anonimizados em Dev1..Dev6) — com "
+        "100% de taxa de acerto e tempo médio inferior a 4 ms por execução. "
+        "A execução contra o dado produtivo tem todos os indicadores batendo "
+        "com a contagem visual do board (13 pendentes + 14 em andamento + 3 em "
+        "revisão + 3 finalizados = 33). A principal conclusão é que a arquitetura modular adotada "
+        "atendeu plenamente aos requisitos funcionais e expôs, no dado real, uma "
+        "lacuna de processo (ausência de estimativa de horas pelo time) — "
+        "ilustrando que o próprio agente passa a atuar como instrumento de "
+        "melhoria contínua."
+    ))
 
-    # --------- 2. Ambiente e Metodologia de Teste
-    add_heading_pt(doc, "2. Ambiente e Metodologia de Teste", level=1)
-    doc.add_paragraph(
-        "Ambiente de execução: Python 3.14 em macOS Darwin 25.6.0; "
-        "dependências gerenciadas via venv (python-docx, pandas, matplotlib, pytest). "
-        "Testes orquestrados com pytest; medições de tempo via time.perf_counter."
-    )
-    doc.add_paragraph(
+
+def preencher_ambiente(doc) -> None:
+    p = find_paragraph(doc, "Descreva como os testes foram conduzidos")
+    replace_paragraph_text(p, (
+        "Ambiente de execução: Python 3.14 em macOS (Darwin 25.6.0), dependências "
+        "gerenciadas via venv (python-docx, pandas, matplotlib, pytest). Testes "
+        "orquestrados com pytest; medições de tempo via time.perf_counter. "
         "Dados de entrada: (i) 6 arquivos .docx sintéticos gerados programaticamente "
-        "nos próprios testes (cada cenário produz um .docx reproduzindo o layout "
-        "de export do Jira); (ii) 1 export CSV real do projeto TR (Escola de TI — "
-        "SAUF BR) extraído da Sprint 7, com 33 tarefas e 7 integrantes."
-    )
-    doc.add_paragraph(
-        "Critérios gerais de avaliação: (a) taxa de acerto por cenário "
-        "(indicadores obtidos vs esperados); (b) tempo de execução total do "
-        "pipeline; (c) teste de regressão travando os valores do board real "
-        "(qualquer alteração futura que mude os números é detectada)."
-    )
+        "nos próprios testes (cada cenário produz um .docx reproduzindo o layout do "
+        "export do Jira); (ii) 1 export CSV real do projeto TR (Escola de TI — SAUF "
+        "BR), Sprint 7, com 33 tarefas e 6 integrantes, utilizado como fixture "
+        "anonimizada (nomes substituídos por Dev1..Dev6; o rótulo 'Não atribuído' "
+        "que aparece nos gráficos é uma categoria de agregação para tarefas sem "
+        "responsável, não uma 7ª pessoa). Critérios gerais de "
+        "avaliação: (a) taxa de acerto por cenário (indicadores obtidos vs. "
+        "esperados); (b) tempo de execução total do pipeline; (c) teste de "
+        "regressão travando os valores do board real, detectando automaticamente "
+        "qualquer alteração futura."
+    ))
 
-    # --------- 3. Testes por Agente
-    add_heading_pt(doc, "3. Testes, Estatísticas e Demonstração do Agente", level=1)
-    add_heading_pt(doc, "Agente 1 — Agente de Gestão de Projetos", level=2)
+
+def preencher_agente_1(doc, metricas: list[dict], ind: dict) -> None:
+    # Troca o título do Agente 1 (que era 'Agente de Documentação')
+    for p in doc.paragraphs:
+        if "Agente 1 —" in p.text and "Agente de Documentação" in p.text:
+            replace_paragraph_text(p, "Agente de Gestão de Projetos")
+            break
 
     # 3.1 Confirmação Entrega 1
-    add_heading_pt(doc, "Confirmação da base tecnológica e do modelo de interação (Entrega 1)", level=3)
-    doc.add_paragraph(
+    p_conf = find_paragraph(doc, "Confirme se a base tecnológica")
+    replace_paragraph_text(p_conf, (
         "Base tecnológica mantida conforme a Entrega 1: arquitetura própria em "
-        "Python aplicando Pipe-and-Filter, com os quatro padrões de projeto "
-        "exigidos (Controller, Factory Method, Adapter e Strategy). A integração "
-        "com LLM (OpenAI) foi mantida como componente opcional e desacoplado — "
-        "via LLMAdapter / NullLLMAdapter — garantindo que o pipeline rode em "
-        "modo totalmente determinístico (sem chamada externa) quando a chave "
-        "não está configurada, o que foi fundamental para a reprodutibilidade "
-        "dos testes."
-    )
-    doc.add_paragraph(
-        "Modelo de interação mantido: operação independente a partir de um "
-        "artefato de entrada (export Jira), sem acoplamento síncrono com outros "
-        "agentes. Única alteração em relação à Entrega 1: além do formato .docx, "
-        "foi adicionado suporte a export .csv do Jira, pois a interface atual do "
-        "Jira Cloud descontinuou o export direto para Word — a decisão foi "
-        "absorvida no pipeline via um segundo Adapter concreto (CsvJiraAdapter), "
-        "preservando todo o restante da arquitetura."
-    )
+        "Python aplicando o estilo arquitetural Pipe-and-Filter, com os quatro "
+        "padrões de projeto exigidos (Controller — GRASP; Factory Method, Adapter "
+        "e Strategy — GoF). A integração com LLM (OpenAI) foi mantida como "
+        "componente opcional e desacoplado via LLMAdapter / NullLLMAdapter, "
+        "garantindo que o pipeline rode em modo totalmente determinístico (sem "
+        "chamada externa) quando a chave não estiver configurada — essencial para "
+        "a reprodutibilidade dos testes. Modelo de interação mantido: operação "
+        "independente a partir de um artefato de entrada (export do Jira), sem "
+        "acoplamento síncrono com outros agentes. Única alteração em relação à "
+        "Entrega 1: além do formato .docx, foi adicionado suporte a export .csv, "
+        "pois a interface atual do Jira Cloud descontinuou o export direto para "
+        "Word; a mudança foi absorvida com a criação de um segundo Adapter "
+        "concreto (CsvJiraAdapter), preservando todo o restante da arquitetura."
+    ))
 
-    # 3.2 Casos de teste
-    add_heading_pt(doc, "Casos de teste executados (mínimo de 5)", level=3)
-    metricas = load_metricas()
-    linhas_casos: list[list[str]] = []
-    for i, m in enumerate(metricas, 1):
+    # 3.2 Casos de teste — Tabela 1 (modelo tem 5 linhas; acrescentamos as extras)
+    def _fmt_obtido(indicadores: list[dict]) -> str:
+        """Formata a coluna 'Resultado obtido' tratando None como 'N/A'."""
+        parts = []
+        for x in indicadores:
+            if isinstance(x["value"], dict):
+                continue
+            val = "N/A" if x["value"] is None else x["value"]
+            parts.append(f"{x['name']}={val}")
+        return "; ".join(parts)
+
+    t_casos = doc.tables[1]
+    for i, m in enumerate(metricas[:5]):
         nome = m["cenario"]
-        desc, esperado = CENARIO_DESC.get(nome, ("—", "—"))
+        desc, esperado = CENARIOS_INFO.get(nome, ("—", "—"))
         inds = json.loads(m["indicadores_json"])
-        resumo_obtido = "; ".join(
-            f"{x['name']}={x['value']}" for x in inds
-            if not isinstance(x["value"], dict)
-        )
-        linhas_casos.append([str(i), f"{nome} — {desc}", esperado, resumo_obtido])
-    add_table(doc, ["Nº", "Cenário testado", "Resultado esperado", "Resultado obtido"], linhas_casos)
+        set_cell_text(t_casos.rows[i + 1].cells[1], f"{nome} — {desc}")
+        set_cell_text(t_casos.rows[i + 1].cells[2], esperado)
+        set_cell_text(t_casos.rows[i + 1].cells[3], _fmt_obtido(inds))
 
-    # 3.3 Métricas e estatísticas
-    add_heading_pt(doc, "Métricas e estatísticas coletadas", level=3)
+    # Cenários adicionais (C6, C7) — adiciona novas linhas no fim da tabela
+    for idx, m in enumerate(metricas[5:], start=6):
+        desc, esperado = CENARIOS_INFO.get(m["cenario"], ("—", "—"))
+        inds = json.loads(m["indicadores_json"])
+        new_row = t_casos.add_row().cells
+        set_cell_text(new_row[0], str(idx))
+        set_cell_text(new_row[1], f"{m['cenario']} — {desc}")
+        set_cell_text(new_row[2], esperado)
+        set_cell_text(new_row[3], _fmt_obtido(inds))
+
+    # 3.3 Métricas — Tabela 2
     taxas = [float(m["taxa_acerto_%"]) for m in metricas]
     tempos = [float(m["duracao_seg"]) for m in metricas]
     taxa_media = sum(taxas) / len(taxas)
     tempo_medio_ms = sum(tempos) / len(tempos) * 1000
     tempo_max_ms = max(tempos) * 1000
-    linhas_met = [
-        ["Taxa de acerto/precisão", f"{taxa_media:.2f}%", "≥ 95% (meta Entrega 1)"],
-        ["Tempo médio de resposta", f"{tempo_medio_ms:.2f} ms", "≤ 5000 ms por execução"],
-        ["Tempo máximo observado", f"{tempo_max_ms:.2f} ms", "≤ 5000 ms (limite assert nos testes)"],
-        ["Nº de cenários executados", f"{len(metricas)}", "≥ 5 cenários (rubrica)"],
-        ["Cobertura de categorias de indicador", "8/8", "100% dos indicadores do agente"],
-    ]
-    add_table(doc, ["Métrica", "Valor obtido", "Meta/critério de aceitação (Entrega 1)"], linhas_met)
 
-    # 3.4 Gráficos
-    add_heading_pt(doc, "Gráfico(s) e visualização dos resultados", level=3)
-    add_image(doc, GRAFICOS / "04_taxa_acerto.png", width_cm=15,
-              caption="Figura 1 — Taxa de acerto por cenário (100% em todos os 6 testes).")
-    add_image(doc, GRAFICOS / "03_tempo_execucao.png", width_cm=15,
-              caption="Figura 2 — Tempo de execução do pipeline por cenário (ms).")
-    add_image(doc, GRAFICOS / "01_status_tarefas.png", width_cm=15,
-              caption="Figura 3 — Distribuição de tarefas por categoria, calculada contra o board real (Sprint 7 / TR).")
-    add_image(doc, GRAFICOS / "02_horas_por_integrante.png", width_cm=15,
-              caption="Figura 4 — Horas realizadas por integrante extraídas do export real do Jira.")
+    t_met = doc.tables[2]
+    set_cell_text(t_met.rows[1].cells[1], f"{taxa_media:.2f}%")
+    set_cell_text(t_met.rows[1].cells[2], "≥ 95% (meta Entrega 1)")
+    set_cell_text(t_met.rows[2].cells[1], f"{tempo_medio_ms:.2f} ms")
+    set_cell_text(t_met.rows[2].cells[2], "≤ 5000 ms por execução")
+    # Linha "[outra métrica]" — troca por cobertura de indicadores
+    set_cell_text(t_met.rows[3].cells[0], "Cobertura de indicadores exigidos (8 ao todo)")
+    set_cell_text(t_met.rows[3].cells[1], "8/8 (100%)")
+    set_cell_text(t_met.rows[3].cells[2], "100% dos indicadores exigidos pela Entrega 1")
 
-    # 3.5 Evidência antes/depois
-    add_heading_pt(doc, "Evidência antes/depois", level=3)
-    doc.add_paragraph("Antes (entrada bruta — export do Jira): 33 linhas no CSV com 86 colunas, "
-                      "mescla de status em PT-BR (Em andamento, Tarefas pendentes, Em Revisão 1, Concluído), "
-                      "tempos gastos armazenados em SEGUNDOS, 1 issue do tipo 'Ajuste' misturada "
-                      "no backlog, sem qualquer agregação ou cálculo de taxa de retrabalho.")
+    # Linha extra: tempo máximo
+    extra = t_met.add_row().cells
+    set_cell_text(extra[0], "Tempo máximo observado em um cenário")
+    set_cell_text(extra[1], f"{tempo_max_ms:.2f} ms")
+    set_cell_text(extra[2], "≤ 5000 ms (limite do assert)")
 
-    doc.add_paragraph("Depois (saída do agente — data/output/indicadores_tr_sprint7.csv):")
-    ind = load_indicadores()
-    linhas_depois = []
-    for nome, info in ind.items():
-        if isinstance(info["value"], dict) or nome == "horas_por_integrante":
-            continue
-        linhas_depois.append([nome, f"{info['value']}", info["unit"] or "—"])
-    add_table(doc, ["Indicador", "Valor calculado", "Unidade"], linhas_depois)
+    # Linha extra: número de cenários
+    extra2 = t_met.add_row().cells
+    set_cell_text(extra2[0], "Nº de cenários de teste executados")
+    set_cell_text(extra2[1], f"{len(metricas)} (6 sintéticos + 1 com dado real do Jira)")
+    set_cell_text(extra2[2], "≥ 5 cenários (rubrica)")
 
-    doc.add_paragraph("Detalhamento de horas por integrante (saída estruturada do agente):")
-    detalhe_int = ind["horas_por_integrante"]["detail"] or {}
-    linhas_int = [[nome, f"{v['estimadas']:.2f}", f"{v['realizadas']:.2f}"]
-                  for nome, v in detalhe_int.items()]
-    add_table(doc, ["Integrante", "Horas estimadas", "Horas realizadas"], linhas_int)
+    # 3.4 Gráficos — substituir o placeholder por gráfico principal + anexos
+    p_graf = find_paragraph(doc, "Insira aqui gráfico(s)")
+    for r in list(p_graf.runs):
+        r._element.getparent().remove(r._element)
+    p_graf.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_graf.add_run().add_picture(str(GRAFICOS / "04_taxa_acerto.png"), width=Cm(14.5))
+    insert_paragraph_after(
+        p_graf,
+        "Figura 1 — Taxa de acerto por cenário (100% nos 7 testes).",
+        align=WD_ALIGN_PARAGRAPH.CENTER, size=10, italic=True,
+    )
 
-    doc.add_paragraph(
-        "Validação cruzada com o board: o agente reporta 33 tarefas, exatamente "
-        "o mesmo total visível no Jira (13 Itens Pendentes + 14 Em Andamento + "
-        "3 Em Revisão + 0 Em Homologação + 3 Finalizados = 33). Os 3 "
-        "finalizados correspondem aos 3 reportados como 'tarefas_concluidas' "
-        "pelo agente. A única issue marcada como 'Ajuste' no Jira foi "
-        "corretamente detectada pela Strategy correspondente."
+    # Figuras adicionais (empilhadas logo abaixo, antes do próximo heading)
+    anchor = find_paragraph(doc, "Figura 1 — Taxa de acerto")
+    for img, cap in [
+        ("03_tempo_execucao.png", "Figura 2 — Tempo de execução do pipeline por cenário (ms)."),
+        ("01_status_tarefas.png", "Figura 3 — Distribuição de tarefas por categoria (Sprint 7 / TR)."),
+        ("02_horas_por_integrante.png", "Figura 4 — Horas realizadas por integrante (export real anonimizado)."),
+    ]:
+        img_p = insert_paragraph_after(anchor, align=WD_ALIGN_PARAGRAPH.CENTER)
+        img_p.add_run().add_picture(str(GRAFICOS / img), width=Cm(14.5))
+        cap_p = insert_paragraph_after(img_p, cap, align=WD_ALIGN_PARAGRAPH.CENTER, size=10, italic=True)
+        anchor = cap_p
+
+    # 3.5 Evidência antes/depois (texto + 3 prints reais)
+    p_evid = find_paragraph(doc, "Insira prints, trechos de código ou saídas reais")
+    replace_paragraph_text(p_evid, (
+        "Esta seção apresenta três evidências reais da atuação do agente sobre o "
+        "dado produtivo (Sprint 7 do board TR, 33 tarefas). O conteúdo dos três "
+        "prints a seguir é extraído diretamente dos arquivos do repositório e da "
+        "execução dos testes automatizados."
+    ))
+
+    # Figura 5 — print do CSV de entrada
+    anchor = p_evid
+    img_p = insert_paragraph_after(anchor, align=WD_ALIGN_PARAGRAPH.CENTER)
+    img_p.add_run().add_picture(str(GRAFICOS / "06_evidencia_csv_entrada.png"), width=Cm(15.5))
+    cap_p = insert_paragraph_after(
+        img_p,
+        "Figura 5 (antes) — trecho do CSV bruto exportado do Jira "
+        "(tests/fixtures/jira_sprint7_anon.csv): 86 colunas, status em PT-BR "
+        "misturados, tempos em segundos.",
+        align=WD_ALIGN_PARAGRAPH.CENTER, size=10, italic=True,
+    )
+
+    # Figura 6 — print do CSV de saída
+    img_p = insert_paragraph_after(cap_p, align=WD_ALIGN_PARAGRAPH.CENTER)
+    img_p.add_run().add_picture(str(GRAFICOS / "07_evidencia_csv_saida.png"), width=Cm(15.5))
+    cap_p = insert_paragraph_after(
+        img_p,
+        "Figura 6 (depois) — CSV padronizado gerado pelo agente "
+        "(data/output/indicadores_tr_sprint7.csv): 8 indicadores de gestão em 4 "
+        "colunas semânticas.",
+        align=WD_ALIGN_PARAGRAPH.CENTER, size=10, italic=True,
+    )
+
+    # Texto de ponte explicando a validação cruzada
+    cap_p = insert_paragraph_after(
+        cap_p,
+        "Validação cruzada com o board (visual): 13 Itens Pendentes + 14 Em "
+        "Andamento + 3 Em Revisão + 0 Em Homologação + 3 Finalizados = 33 — "
+        "exatamente o total reportado pelo agente. Os 3 finalizados correspondem "
+        "aos 3 'tarefas_concluidas'; a única issue do tipo 'Ajuste' no Jira foi "
+        "corretamente detectada pela Strategy correspondente. Todos esses valores "
+        "estão travados em um teste de regressão automatizado "
+        "(test_regression_real_jira.py).",
+    )
+
+    # Figura 7 — pytest passando
+    img_p = insert_paragraph_after(cap_p, align=WD_ALIGN_PARAGRAPH.CENTER)
+    img_p.add_run().add_picture(str(GRAFICOS / "08_evidencia_pytest.png"), width=Cm(15.5))
+    insert_paragraph_after(
+        img_p,
+        "Figura 7 — saída real do 'pytest -v': 21 testes passando — 2 do "
+        "adapter, 6 cenários de integração (C1–C6) + relatório consolidado, "
+        "8 de regressão contra o export real (C7) e 4 das strategies.",
+        align=WD_ALIGN_PARAGRAPH.CENTER, size=10, italic=True,
     )
 
     # 3.6 Análise crítica
-    add_heading_pt(doc, "Análise crítica do agente", level=3)
-    doc.add_paragraph(
+    p_an = find_paragraph(doc, "Os resultados confirmam a especificação")
+    replace_paragraph_text(p_an, (
         "Os resultados confirmam plenamente a especificação da Entrega 1 em "
-        "termos funcionais (todos os 8 indicadores exigidos são produzidos) e de "
-        "arquitetura (os quatro padrões de projeto foram aplicados sem "
-        "ajustes estruturais ao longo da implementação). O custo marginal de "
-        "adicionar um novo formato de entrada (de .docx para .csv quando a UI do "
-        "Jira removeu o export Word) foi de uma única classe nova "
-        "(CsvJiraAdapter) sem tocar em Controller, Strategies ou Factory — "
-        "evidência prática de que a aplicação do padrão Adapter se pagou "
-        "imediatamente na primeira mudança de requisito."
-    )
-    doc.add_paragraph(
-        "A principal descoberta não funcional veio do dado real: a soma de "
-        "'horas estimadas' no board da Sprint 7 ficou em 0 h, pois o time não "
-        "preenche o campo 'Estimativa original' no Jira. Esse é um achado "
-        "operacional valioso — o indicador 'horas_estimadas' não só mede, como "
-        "expõe uma lacuna de processo que impede, hoje, qualquer análise de "
-        "aderência à meta de 1.000 h. Como contraprova, o cenário C6 "
-        "(sintético) demonstra que o indicador funciona corretamente quando os "
-        "dados existem (10 tarefas × 100 h = 1.000 h, aderente à meta com "
-        "desvio 0)."
-    )
-    doc.add_paragraph(
-        "Ajustes implementados em relação ao plano inicial: (i) adoção do "
-        "Adapter também para o LLM, criando um NullLLMAdapter que mantém o "
-        "pipeline 100% determinístico nos testes; (ii) normalização defensiva "
-        "de status do Jira, aceitando variações com acento, caixa e sufixos "
-        "numéricos (ex.: 'Em Revisão 1', 'Em Revisão 2'); (iii) conversão "
-        "automática de tempo em segundos (formato do export CSV do Jira) para "
-        "horas decimais, encapsulada no adapter."
+        "termos funcionais (todos os 8 indicadores são produzidos) e de "
+        "arquitetura (os quatro padrões foram aplicados sem ajustes estruturais). "
+        "O custo marginal de adicionar um novo formato de entrada — de .docx para "
+        ".csv, quando a UI do Jira descontinuou o export Word — foi de uma única "
+        "classe nova (CsvJiraAdapter) sem tocar em Controller, Strategies ou "
+        "Factory: evidência prática de que a aplicação do padrão Adapter se pagou "
+        "imediatamente na primeira mudança de requisito. A principal descoberta "
+        "não funcional veio do dado real: a soma de 'horas estimadas' no board da "
+        "Sprint 7 ficou em 0 h, pois o time não preenche o campo 'Estimativa "
+        "original' no Jira — o indicador 'horas_estimadas' não só mede como expõe "
+        "uma lacuna de processo que impede, hoje, qualquer análise de aderência à "
+        "meta de 1.000 h. Como contraprova, o cenário C6 (sintético) demonstra "
+        "que o indicador funciona corretamente quando os dados existem (10 × 100 "
+        "h = 1.000 h, aderente à meta com desvio 0). Ajustes implementados em "
+        "relação ao plano inicial: (i) adoção do Adapter também para o LLM, "
+        "criando um NullLLMAdapter que mantém o pipeline determinístico; (ii) "
+        "normalização defensiva de status do Jira, aceitando variações com "
+        "acento, caixa e sufixos numéricos (ex.: 'Em Revisão 1', 'Em Revisão 2'); "
+        "(iii) conversão automática de tempo em segundos (formato do CSV) para "
+        "horas decimais, encapsulada no adapter; (iv) convenção explícita no "
+        "indicador 'taxa_retrabalho' para o caso de denominador zero (sem "
+        "tarefas concluídas no período): a Strategy devolve None e o CSV grava "
+        "'N/A' — nunca 0%, que seria enganoso. Esse comportamento é coberto "
+        "pelo cenário de borda C5."
+    ))
+
+
+def remover_agentes_2_a_5(doc) -> None:
+    """Apaga tudo do Heading 'Agente 2 — ' até (exclusive) '4. Consolidação'."""
+    removidos = delete_elements_between(doc, "Agente 2 —", "4. Consolidação")
+    print(f"  Removidos {removidos} elementos (agentes 2–5)")
+
+
+def preencher_consolidacao(doc, metricas: list[dict]) -> None:
+    taxa_media = sum(float(m["taxa_acerto_%"]) for m in metricas) / len(metricas)
+    tempo_medio_ms = sum(float(m["duracao_seg"]) for m in metricas) / len(metricas) * 1000
+
+    t_cons = doc.tables[-1]
+    # Troca "Tempo médio (s)" por "(ms)" PRESERVANDO bold/fonte do cabeçalho
+    set_cell_text_keep_format(t_cons.rows[0].cells[3], "Tempo médio (ms)")
+    # Preenche a linha 1 com os dados do único agente (valores em ms, consistentes com Tabela 2 e Figura 5)
+    set_cell_text(t_cons.rows[1].cells[0], "Agente de Gestão de Projetos")
+    set_cell_text(t_cons.rows[1].cells[1], str(len(metricas)))
+    set_cell_text(t_cons.rows[1].cells[2], f"{taxa_media:.2f}%")
+    set_cell_text(t_cons.rows[1].cells[3], f"{tempo_medio_ms:.2f}")
+    # Remove as linhas vazias dos agentes 2–5
+    delete_table_rows(t_cons, keep_indices=[0, 1])
+    # Ajusta larguras p/ caber na área útil (A4 21cm − margens 3+2 = 16cm)
+    set_table_widths_cm(t_cons, [6.5, 2.5, 3.5, 3.5])
+
+    # Substitui o placeholder de gráfico por imagem de consolidação
+    replace_placeholder_with_image(
+        doc,
+        "Insira aqui um gráfico comparativo consolidado",
+        GRAFICOS / "05_consolidacao.png",
+        caption="Figura 8 — Taxa de sucesso por tipo de cenário (típico, borda, real). Unidade única (%).",
+        width_cm=13,
     )
 
-    # --------- 4. Consolidação
-    add_heading_pt(doc, "4. Consolidação Estatística Geral do Ecossistema", level=1)
-    doc.add_paragraph(
-        "Dado que esta entrega concentrou o escopo em 1 agente (Agente de Gestão "
-        "de Projetos — conforme nota de escopo na Identificação), a consolidação "
-        "reúne os números agregados dos 6 cenários executados e da execução "
-        "contra o dado real do Jira."
-    )
-    add_table(doc, ["Agente", "Nº de testes", "Taxa de sucesso", "Tempo médio (ms)"], [
-        ["Agente de Gestão de Projetos", str(len(metricas)),
-         f"{taxa_media:.2f}%", f"{tempo_medio_ms:.2f}"],
-    ])
-    add_image(doc, GRAFICOS / "05_consolidacao.png", width_cm=14,
-              caption="Figura 5 — Consolidação dos indicadores da suíte de testes.")
 
-    # --------- 5. Demonstração
-    add_heading_pt(doc, "5. Demonstração dos Resultados", level=1)
-    doc.add_paragraph(
-        "A demonstração pode ser reproduzida localmente com os comandos:"
-    )
-    cmd = doc.add_paragraph()
-    cr = cmd.add_run(
-        "    cd projeto_gestao\n"
-        "    python -m venv .venv && source .venv/bin/activate\n"
-        "    pip install -r requirements.txt\n"
-        "    python main.py tests/fixtures/jira_real_tr_sprint7.csv \\\n"
-        "        --out data/output/indicadores_tr_sprint7.csv --verbose\n"
-        "    pytest -v"
-    )
-    cr.font.name = "Consolas"
-    cr.font.size = Pt(10)
+def preencher_demonstracao(doc) -> None:
+    p = find_paragraph(doc, "Anexe ou referencie prints de tela")
+    replace_paragraph_text(p, (
+        "A demonstração pode ser reproduzida localmente a partir do repositório "
+        "público do projeto. Comandos:"
+    ))
+    cmd_p = insert_paragraph_after(p, (
+        "git clone https://github.com/LeoLeitao13/aep-agente-gestao-projeto.git\n"
+        "cd aep-agente-gestao-projeto\n"
+        "python -m venv .venv && source .venv/bin/activate\n"
+        "pip install -r requirements.txt\n"
+        "python main.py tests/fixtures/jira_sprint7_anon.csv --out data/output/indicadores.csv --verbose\n"
+        "pytest -v"
+    ), size=10)
+    cmd_p.paragraph_format.left_indent = Cm(1.0)
+    for r in cmd_p.runs:
+        r.font.name = "Courier New"
 
-    doc.add_paragraph(
-        "Durante a defesa serão apresentados: (i) print do board Jira original "
-        "(evidência 'antes'); (ii) execução ao vivo do pipeline; (iii) "
-        "abertura do CSV gerado (evidência 'depois'); (iv) execução do "
-        "pytest com os 21 testes passando (unitários + integração + regressão "
-        "contra Jira real)."
+    insert_paragraph_after(cmd_p, (
+        "As evidências 'antes' (CSV bruto do Jira) e 'depois' (CSV gerado pelo "
+        "agente) estão apresentadas nas Figuras 5 e 6 da seção 3. A Figura 7 "
+        "traz a saída real do pytest com os 21 testes passando (2 do adapter, "
+        "6 cenários de integração C1–C6 + relatório consolidado, 8 de "
+        "regressão contra o export real C7 e 4 das strategies). Qualquer "
+        "avaliador pode reproduzir integralmente a demonstração clonando o "
+        "repositório público, instalando as dependências e executando os dois "
+        "comandos listados acima."
+    ))
+
+
+def preencher_retrospectiva(doc) -> None:
+    replace_paragraph_text(
+        find_paragraph(doc, "A metodologia definida na Entrega 1"),
+        (
+            "A metodologia ágil baseada em sprints curtas no Jira foi seguida. "
+            "Houve uma adaptação relevante acordada com o professor e a equipe: "
+            "o escopo foi reduzido de 5 para 1 agente, priorizando profundidade "
+            "(arquitetura correta, testes automatizados e regressão contra dado "
+            "real) em lugar de amplitude (5 agentes implementados de forma rasa)."
+        ),
     )
-
-    # --------- 6. Retrospectiva
-    add_heading_pt(doc, "6. Retrospectiva de Gestão do Projeto", level=1)
-    add_heading_pt(doc, "Aderência à metodologia planejada", level=3)
-    doc.add_paragraph(
-        "A metodologia ágil baseada em sprints curtas no Jira foi seguida. "
-        "Houve uma adaptação relevante: o escopo foi reduzido de 5 para 1 "
-        "agente, com acordo prévio, priorizando profundidade (arquitetura "
-        "correta + testes automatizados + regressão contra dado real) em "
-        "lugar de amplitude (5 agentes implementados de forma rasa)."
+    replace_paragraph_text(
+        find_paragraph(doc, "Liste práticas que contribuíram"),
+        (
+            "Uso disciplinado de padrões de projeto desde o primeiro commit (cada "
+            "novo indicador é uma Strategy nova, sem tocar em nada mais); "
+            "desacoplamento do LLM atrás de um Adapter (permitiu rodar todos os "
+            "testes em modo determinístico, sem depender de rede ou chave); "
+            "teste de regressão contra o CSV real do Jira (qualquer mudança "
+            "futura que altere os números do board é detectada automaticamente); "
+            "geração automatizada de .docx sintéticos nos próprios testes, "
+            "evitando fixtures binárias desnecessárias."
+        ),
     )
-    add_heading_pt(doc, "O que funcionou bem", level=3)
-    for item in [
-        "Uso disciplinado de padrões de projeto desde o primeiro commit — "
-        "cada novo indicador vira uma Strategy sem tocar em nada mais.",
-        "Decoupling do LLM atrás de um Adapter — permitiu rodar todos os "
-        "testes em modo determinístico, sem depender de rede ou chave.",
-        "Teste de regressão contra o CSV real do Jira — qualquer mudança "
-        "futura que altere os números do board é imediatamente detectada.",
-        "Geração automatizada de .docx sintéticos nos próprios testes, "
-        "evitando fixtures binárias comitadas desnecessariamente.",
-    ]:
-        add_bullet(doc, item)
-
-    add_heading_pt(doc, "O que não funcionou / dificuldades enfrentadas", level=3)
-    for item in [
-        "A interface atual do Jira Cloud não oferece export .docx — "
-        "exigiu criar um segundo Adapter (CsvJiraAdapter) em cima do CSV.",
-        "O time não preenche 'Estimativa original' no board, o que zera o "
-        "indicador de horas estimadas no dado real — virou uma oportunidade "
-        "de melhoria de processo exposta pelo próprio agente.",
-        "Formatos de hora heterogêneos no Jira (segundos no CSV, '3h 30m' "
-        "no .docx) exigiram parsing defensivo.",
-    ]:
-        add_bullet(doc, item)
-
-    add_heading_pt(doc, "Lições aprendidas", level=3)
-    for item in [
-        "Adapter é o padrão com maior retorno sobre investimento em "
-        "projetos que leem dados de sistemas externos — a primeira mudança "
-        "de formato já quita o custo inicial.",
-        "Separar regras de negócio (Strategies) de orquestração "
-        "(Controller) acelera brutalmente a criação de novos indicadores.",
-        "Começar por uma suíte de testes com cenários sintéticos e só "
-        "depois conectar ao dado real reduz o risco de retrabalho.",
-        "Reduzir escopo proativamente (5 → 1 agente) e documentar a "
-        "decisão é melhor do que entregar 5 agentes rasos.",
-    ]:
-        add_bullet(doc, item)
-
-    # --------- 7. Conclusão
-    add_heading_pt(doc, "7. Conclusão", level=1)
-    doc.add_paragraph(
-        "Os objetivos de aprendizagem da AEP foram atingidos: a equipe aplicou "
-        "na prática um estilo arquitetural (Pipe-and-Filter) combinado com "
-        "quatro padrões de projeto clássicos (Controller, Factory Method, "
-        "Adapter, Strategy), mediu a solução quantitativamente com uma suíte "
-        "automatizada e validou-a contra dados reais de uso do Jira. A "
-        "escolha pelo aprofundamento em um único agente permitiu demonstrar "
-        "não apenas que o código funciona, mas por quê funciona — explicitando "
-        "o papel de cada padrão na resposta a uma mudança real de requisito."
+    replace_paragraph_text(
+        find_paragraph(doc, "Liste rotinas/decisões que geraram atrasos"),
+        (
+            "No plano da gestão: os integrantes tiveram dificuldade em registrar "
+            "as horas trabalhadas de forma consistente no Clockify, o que "
+            "limita a precisão do indicador 'horas por integrante' calculado "
+            "pelo agente e, no board do Jira, resultou em ausência de "
+            "estimativas e apontamentos incompletos. Além disso, o "
+            "replanejamento do escopo (redução de 5 para 1 agente) ocorreu "
+            "tardiamente, encurtando o tempo disponível para testes e para a "
+            "redação do documento final. "
+            "No plano técnico: a interface atual do Jira Cloud não oferece "
+            "export .docx — exigiu criar um segundo Adapter (CsvJiraAdapter) em "
+            "cima do CSV; formatos de hora heterogêneos no Jira (segundos no "
+            "CSV, '3h 30m' no .docx) exigiram parsing defensivo; a ausência de "
+            "'Estimativa original' preenchida no board zerou o indicador de "
+            "horas estimadas no dado real — virou uma oportunidade de melhoria "
+            "de processo exposta pelo próprio agente."
+        ),
     )
-    doc.add_paragraph(
-        "A conexão com a ODS escolhida [ ex.: ODS 4 — Educação de Qualidade, "
-        "aderente ao projeto 'Escola de TI — SAUF BR' ] se dá pelo papel de "
-        "instrumentação de processos educacionais/gestão: o agente transforma "
-        "um artefato bruto (export do board) em indicadores acionáveis, "
-        "apoiando decisões de gestão e expondo lacunas de processo — "
-        "aplicável tanto ao projeto da disciplina quanto a cenários "
-        "educacionais reais de coordenação de projetos acadêmicos."
+    replace_paragraph_text(
+        find_paragraph(doc, "O que a equipe faria diferente"),
+        (
+            "Em um próximo projeto a equipe (i) acordaria no sprint-zero uma "
+            "rotina obrigatória de apontamento diário no Clockify + preenchimento "
+            "de estimativas no Jira, com responsável por cobrar — essa "
+            "disciplina de gestão é pré-requisito para qualquer indicador de "
+            "esforço ter valor; (ii) faria revisão de escopo logo após a "
+            "Entrega 1, para evitar replanejamento tardio; (iii) manteria o uso "
+            "disciplinado de padrões (Adapter é o de maior retorno em "
+            "integrações com sistemas externos — a primeira mudança de formato "
+            "já quita o custo inicial); (iv) continuaria separando regras de "
+            "negócio (Strategies) de orquestração (Controller), que acelera "
+            "muito a criação de novos indicadores; e (v) manteria a prática de "
+            "começar por cenários de teste sintéticos e só depois conectar ao "
+            "dado real, reduzindo risco de retrabalho."
+        ),
     )
 
-    # --------- 8. Referências
-    add_heading_pt(doc, "8. Referências Utilizadas", level=1)
-    for ref in [
-        "GAMMA, E.; HELM, R.; JOHNSON, R.; VLISSIDES, J. Padrões de projeto: "
-        "soluções reutilizáveis de software orientado a objetos. Porto "
-        "Alegre: Bookman, 2000.",
-        "LARMAN, C. Utilizando UML e padrões: uma introdução à análise e ao "
-        "projeto orientados a objetos e ao desenvolvimento iterativo. 3. ed. "
-        "Porto Alegre: Bookman, 2007.",
-        "SHAW, M.; GARLAN, D. Software Architecture: Perspectives on an "
-        "Emerging Discipline. Upper Saddle River: Prentice-Hall, 1996.",
-        "ATLASSIAN. Jira Software — Documentation. Disponível em: "
-        "<https://support.atlassian.com/jira-software-cloud/>. Acesso em: "
-        f"{datetime.now().strftime('%d/%m/%Y')}.",
-        "PYTEST DEVELOPERS. pytest documentation. Disponível em: "
-        "<https://docs.pytest.org/>. Acesso em: "
-        f"{datetime.now().strftime('%d/%m/%Y')}.",
-        "PYTHON-DOCX. python-docx documentation. Disponível em: "
-        "<https://python-docx.readthedocs.io/>. Acesso em: "
-        f"{datetime.now().strftime('%d/%m/%Y')}.",
-    ]:
-        add_bullet(doc, ref)
+
+def preencher_conclusao(doc) -> None:
+    replace_paragraph_text(
+        find_paragraph(doc, "Conclua relacionando os resultados"),
+        (
+            "Os objetivos de aprendizagem da AEP foram atingidos: a equipe aplicou "
+            "na prática um estilo arquitetural (Pipe-and-Filter) combinado com "
+            "quatro padrões de projeto clássicos (Controller, Factory Method, "
+            "Adapter, Strategy), mediu a solução quantitativamente com uma suíte "
+            "automatizada e validou-a contra dados reais de uso do Jira. A "
+            "escolha pelo aprofundamento em um único agente permitiu demonstrar "
+            "não só que o código funciona, mas por quê funciona — explicitando o "
+            "papel de cada padrão na resposta a uma mudança real de requisito. "
+            "A conexão com a ODS 8 (Trabalho Decente e Crescimento Econômico) "
+            "se dá pelo contexto do próprio projeto — 'Escola de TI — SAUF BR' —, "
+            "cuja missão é preparar jovens para o mercado de tecnologia, "
+            "ampliando o acesso ao trabalho decente e fortalecendo a indústria de "
+            "TI nacional. O agente contribui diretamente com essa missão ao "
+            "instrumentar a gestão dos projetos formativos: transforma um "
+            "artefato bruto (export do board do Jira) em indicadores acionáveis "
+            "de produtividade e retrabalho, apoia decisões de coordenação e "
+            "expõe lacunas de processo — habilidades diretamente transferíveis a "
+            "qualquer ambiente profissional de desenvolvimento de software, "
+            "aproximando a formação dos alunos das práticas reais do mercado."
+        ),
+    )
+
+
+def preencher_referencias(doc) -> None:
+    """Substitui o placeholder por 10 referências ABNT NBR 6023.
+
+    Inserimos TODAS as referências como parágrafos novos (limpos) após o
+    placeholder, depois removemos o placeholder — isso evita que a primeira
+    referência herde a formatação (p.ex. caixa cinza) do placeholder original
+    e deixa todas as entradas visualmente iguais."""
+    p = find_paragraph(doc, "Liste as fontes consultadas")
+    refs = [
+        "ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. NBR 6023: informação e documentação: referências: elaboração. Rio de Janeiro: ABNT, 2018.",
+        "ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. NBR 14724: informação e documentação: trabalhos acadêmicos: apresentação. Rio de Janeiro: ABNT, 2011.",
+        "GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. Padrões de projeto: soluções reutilizáveis de software orientado a objetos. Porto Alegre: Bookman, 2000.",
+        "LARMAN, Craig. Utilizando UML e padrões: uma introdução à análise e ao projeto orientados a objetos e ao desenvolvimento iterativo. 3. ed. Porto Alegre: Bookman, 2007.",
+        "SHAW, Mary; GARLAN, David. Software architecture: perspectives on an emerging discipline. Upper Saddle River: Prentice-Hall, 1996.",
+        "SOMMERVILLE, Ian. Engenharia de software. 10. ed. São Paulo: Pearson, 2019.",
+        f"ATLASSIAN. Jira Software Cloud: documentation. [S. l.], c2024. Disponível em: https://support.atlassian.com/jira-software-cloud/. Acesso em: {datetime.now().strftime('%d %b. %Y').lower()}.",
+        f"PYTEST DEVELOPERS. pytest: helps you write better programs. [S. l.], c2024. Disponível em: https://docs.pytest.org/. Acesso em: {datetime.now().strftime('%d %b. %Y').lower()}.",
+        f"PYTHON-DOCX. python-docx documentation. [S. l.], c2024. Disponível em: https://python-docx.readthedocs.io/. Acesso em: {datetime.now().strftime('%d %b. %Y').lower()}.",
+        "ORGANIZAÇÃO DAS NAÇÕES UNIDAS. Transformando nosso mundo: a Agenda 2030 para o desenvolvimento sustentável. Nova York: ONU, 2015.",
+    ]
+    anchor = p
+    for ref in refs:
+        anchor = insert_paragraph_after(anchor, ref)
+    # Remove o placeholder herdado (que trazia caixa cinza / sombreamento)
+    p._element.getparent().remove(p._element)
+
+
+# =====================================================================
+# Orquestração
+# =====================================================================
+def remover_instrucao_5_agentes(doc) -> None:
+    """Remove o parágrafo 'Preencha uma seção completa para cada um dos 5 agentes...'
+    e o substitui por uma nota de escopo."""
+    p = find_paragraph(doc, "Preencha uma seção completa para cada um dos 5 agentes")
+    if p:
+        replace_paragraph_text(p, (
+            "Nota sobre o escopo: na Entrega 1 havia previsão de um ecossistema de "
+            "5 agentes; após replanejamento com o professor e a equipe, o escopo "
+            "foi concentrado em 1 (um) agente — o Agente de Gestão de Projetos — "
+            "com profundidade reforçada em arquitetura, testes e análise crítica. "
+            "Esta seção apresenta esse agente de forma completa."
+        ))
+
+
+def aplicar_abnt(doc) -> None:
+    """Ajusta papel (A4), margens (3-3-2-2) e fonte padrão (Times New Roman 12pt)
+    SEM alterar a estrutura (seções, tabelas, imagens) do modelo original."""
+    for section in doc.sections:
+        section.page_width = Cm(21.0)
+        section.page_height = Cm(29.7)
+        section.top_margin = Cm(3)
+        section.left_margin = Cm(3)
+        section.bottom_margin = Cm(2)
+        section.right_margin = Cm(2)
+
+    # Define font padrão (rPrDefault no styles.xml) para Times New Roman 12pt preto
+    styles_el = doc.styles.element
+    rpr_default = styles_el.find(qn("w:docDefaults") + "/" + qn("w:rPrDefault"))
+    if rpr_default is None:
+        docdef = OxmlElement("w:docDefaults")
+        styles_el.insert(0, docdef)
+        rpr_default = OxmlElement("w:rPrDefault")
+        docdef.append(rpr_default)
+    rpr = rpr_default.find(qn("w:rPr"))
+    if rpr is None:
+        rpr = OxmlElement("w:rPr")
+        rpr_default.append(rpr)
+    # fonte
+    for tag in ("w:rFonts", "w:sz", "w:szCs", "w:color"):
+        for child in rpr.findall(qn(tag)):
+            rpr.remove(child)
+    rfonts = OxmlElement("w:rFonts")
+    for a in ("w:ascii", "w:hAnsi", "w:cs", "w:eastAsia"):
+        rfonts.set(qn(a), "Times New Roman")
+    rpr.append(rfonts)
+    sz = OxmlElement("w:sz")
+    sz.set(qn("w:val"), "24")   # meio-pontos: 24 = 12pt
+    rpr.append(sz)
+    szcs = OxmlElement("w:szCs")
+    szcs.set(qn("w:val"), "24")
+    rpr.append(szcs)
+    color = OxmlElement("w:color")
+    color.set(qn("w:val"), "000000")
+    rpr.append(color)
+
+
+def build_document() -> Path:
+    # Copia o template para a saída e trabalha na cópia (preserva logo, header, etc.)
+    shutil.copy(TEMPLATE, OUT)
+    doc = Document(str(OUT))
+
+    print("• Aplicando ABNT (A4 + margens 3-3-2-2 + Times New Roman 12pt preto)…")
+    aplicar_abnt(doc)
+
+    metricas = load_metricas()
+    ind = load_indicadores()
+
+    print("• Preenchendo Identificação…")
+    preencher_identificacao(doc)
+    print("• Substituindo instrução dos 5 agentes por nota de escopo…")
+    remover_instrucao_5_agentes(doc)
+    print("• Preenchendo Resumo Executivo…")
+    preencher_resumo_executivo(doc)
+    print("• Preenchendo Ambiente e Metodologia…")
+    preencher_ambiente(doc)
+    print("• Preenchendo bloco do Agente 1…")
+    preencher_agente_1(doc, metricas, ind)
+    print("• Removendo blocos dos Agentes 2 a 5…")
+    remover_agentes_2_a_5(doc)
+    print("• Preenchendo Consolidação…")
+    preencher_consolidacao(doc, metricas)
+    print("• Preenchendo Demonstração…")
+    preencher_demonstracao(doc)
+    print("• Preenchendo Retrospectiva…")
+    preencher_retrospectiva(doc)
+    print("• Preenchendo Conclusão…")
+    preencher_conclusao(doc)
+    print("• Preenchendo Referências (ABNT NBR 6023)…")
+    preencher_referencias(doc)
 
     doc.save(str(OUT))
     return OUT
@@ -499,4 +753,4 @@ def build_document() -> Path:
 
 if __name__ == "__main__":
     out = build_document()
-    print(f"✔ Documento gerado em: {out.relative_to(ROOT)}")
+    print(f"\n✔ Documento gerado em: {out.relative_to(ROOT)}")

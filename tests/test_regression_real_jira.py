@@ -29,11 +29,11 @@ GABARITO = {
 
 HORAS_POR_INTEGRANTE = {
     "Dev1": {"estimadas": 0.0, "realizadas": 0.0},
-    "Dev11": {"estimadas": 0.0, "realizadas": 0.0},
-    "Dev3": {"estimadas": 0.0, "realizadas": 2.77},
-    "Dev5": {"estimadas": 0.0, "realizadas": 2.0},
-    "Dev7": {"estimadas": 0.0, "realizadas": 1.15},
-    "Dev9": {"estimadas": 0.0, "realizadas": 0.0},
+    "Dev2": {"estimadas": 0.0, "realizadas": 2.77},
+    "Dev3": {"estimadas": 0.0, "realizadas": 2.0},
+    "Dev4": {"estimadas": 0.0, "realizadas": 1.15},
+    "Dev5": {"estimadas": 0.0, "realizadas": 0.0},
+    "Dev6": {"estimadas": 0.0, "realizadas": 0.0},
     "Não atribuído": {"estimadas": 0.0, "realizadas": 2.0},
 }
 

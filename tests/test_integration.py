@@ -47,12 +47,23 @@ def _taxa_acerto(esperado: dict, obtido_list: list) -> float:
 
 
 def _append_metrica(cenario: str, duracao: float, acerto: float, indicadores: list) -> None:
-    is_new = not METRICAS_CSV.exists()
-    with METRICAS_CSV.open("a", newline="", encoding="utf-8") as fh:
-        writer = csv.writer(fh)
-        if is_new:
-            writer.writerow(["cenario", "duracao_seg", "taxa_acerto_%", "indicadores_json"])
-        writer.writerow([cenario, duracao, acerto, json.dumps(indicadores, ensure_ascii=False)])
+    """Upsert por nome de cenário — idempotente contra reexecuções do pytest."""
+    header = ["cenario", "duracao_seg", "taxa_acerto_%", "indicadores_json"]
+    rows: list[dict] = []
+    if METRICAS_CSV.exists():
+        with METRICAS_CSV.open(encoding="utf-8") as fh:
+            rows = [r for r in csv.DictReader(fh) if r.get("cenario") != cenario]
+    rows.append({
+        "cenario": cenario,
+        "duracao_seg": str(duracao),
+        "taxa_acerto_%": str(acerto),
+        "indicadores_json": json.dumps(indicadores, ensure_ascii=False),
+    })
+    with METRICAS_CSV.open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.DictWriter(fh, fieldnames=header)
+        writer.writeheader()
+        for r in rows:
+            writer.writerow(r)
 
 
 # ------------------------------------------------------------------- fábrica cenários
@@ -124,13 +135,13 @@ def _cenarios(jira_row_cls) -> list[Cenario]:
             },
         ),
         Cenario(
-            nome="C5_borda_vazio",  # edge: zero tarefas (dividir por zero, horas 0 etc.)
+            nome="C5_borda_vazio",  # edge: zero tarefas; taxa_retrabalho indefinida (0/0)
             rows=[],
             esperado={
                 "tarefas_planejadas": 0,
                 "tarefas_concluidas": 0,
                 "tarefas_canceladas": 0,
-                "taxa_retrabalho": 0.0,
+                "taxa_retrabalho": None,  # N/A — não aplicável (sem concluídas)
                 "horas_estimadas": 0.0,
                 "horas_realizadas": 0.0,
             },

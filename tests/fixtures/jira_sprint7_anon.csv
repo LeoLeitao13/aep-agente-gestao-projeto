@@ -1,5 +1,5 @@
 Resumo,Chave da item,ID da item,Tipo de item,Status,Chave do projeto,Nome do projeto,Tipo de projeto,Líder do projeto,ID do líder do projeto,Descrição do projeto,Prioridade,Resolução,Responsável,ID do responsável,Relator,ID do relator,Criador,ID do criador,Criado,Atualizado(a),Última visualização,Resolvido,Data de entrega,Votos,Descrição,Ambiente,Seguidores,Seguidores,ID dos seguidores,ID dos seguidores,Registro de Trabalho,Registro de Trabalho,Estimativa original,Estimativa de trabalho restante,Tempo gasto,Razão Trabalhada,Σ da Estimativa Original,Σ Estimativa de trabalho restante,Σ de Tempo Gasto,Nível de Segurança,Campo personalizado (Atlassian Project),Campo personalizado (Classificação),Campo personalizado (Comentários),Campo personalizado (Cor do item),Campo personalizado (Data de início),Campo personalizado (Design file),Campo personalizado (Designs ready),Campo personalizado (Documents),Campo personalizado (Effort),Campo personalizado (Idea short description),Campo personalizado (Ideia arquivada),Campo personalizado (Ideia arquivada em),Campo personalizado (Impact),Campo personalizado (Insights),Campo personalizado (Objetivos),Campo personalizado (Progresso da entrega),Campo personalizado (Project start),Campo personalizado (Project target),Campo personalizado (Projeto da Atlassian),Campo personalizado (Roadmap),Campo personalizado (Score),Sprint,Sprint,Campo personalizado (State),Campo personalizado (Status da entrega),Campo personalizado (Status do Projeto da Atlassian),Campo personalizado (Story point estimate),Campo personalizado (Team),Campo personalizado (Tickets vinculados),Campo personalizado (Vulnerabilidade),Campo personalizado (development),Comentar,Categoria do status,Categoria do status alterada,Pai,Chave pai,Parent summary
-Avaliação de Scraper banco de questões ENEM,TR-340,10933,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,22/out/26 6:02 PM,10/nov/26 5:37 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+Avaliação de Scraper banco de questões ENEM,TR-340,10933,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,22/out/26 6:02 PM,10/nov/26 5:37 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
 
 Conduzir a avaliação, auditoria e validação da rotina de _scraping_ voltada à extração do banco de questões, verificando a qualidade, precisão e integridade dos dados recolhidos para a plataforma.
 
@@ -17,8 +17,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 4 a 8 horas",,Dev5,,Dev6,,,,,,,,,0,15420,,,0|i0010n:00i,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,6.0,,,,{},,Em andamento,08/nov/26 9:16 AM,10665,TR-158,Scrapings
-Tela de Perfil do Usuario,TR-326,10919,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,22/out/26 5:05 PM,11/nov/26 3:07 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 4 a 8 horas",,Dev3,,Dev3,,,,,,,,,0,15420,,,0|i0010n:00i,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,6.0,,,,{},,Em andamento,08/nov/26 9:16 AM,10665,TR-158,Scrapings
+Tela de Perfil do Usuario,TR-326,10919,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev4,Dev4,Dev3,Dev3,Dev3,Dev3,22/out/26 5:05 PM,11/nov/26 3:07 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de perfil (tanto para a visualização do próprio utilizador quanto para visitantes), abrangendo a construção da interface, integração com os endpoints de back-end e validação dos fluxos de dados.
 
@@ -36,8 +36,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,14400,,,0|i0010n:00r,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,09/nov/26 8:06 PM,10917,TR-324,Usuario
-Registo - Etapa 1 de 2,TR-362,10955,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,26/out/26 7:54 PM,11/nov/26 3:19 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 8 a 16 horas",,Dev3,,Dev3,,,,,,,,,0,14400,,,0|i0010n:00r,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,09/nov/26 8:06 PM,10917,TR-324,Usuario
+Registo - Etapa 1 de 2,TR-362,10955,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,High,,Dev4,Dev4,Dev3,Dev3,Dev3,Dev3,26/out/26 7:54 PM,11/nov/26 3:19 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar a primeira etapa da tela de criação de conta (Etapa 1 de 2), focada na recolha e validação inicial do nome completo, e-mail e palavra-passe com indicador visual de força da palavra-passe.
 
@@ -57,8 +57,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 6 a 10 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:00t,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Em andamento,09/nov/26 9:24 PM,10953,TR-360,Login
-Login,TR-361,10954,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,26/out/26 7:54 PM,11/nov/26 3:21 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 6 a 10 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i0010n:00t,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Em andamento,09/nov/26 9:24 PM,10953,TR-360,Login
+Login,TR-361,10954,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,High,,Dev4,Dev4,Dev3,Dev3,Dev3,Dev3,26/out/26 7:54 PM,11/nov/26 3:21 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de Login, englobando a interface visual, autenticação tradicional via e-mail e palavra-passe, opção de visibilidade da palavra-passe, funcionalidade ""Manter conectado"", integração com Social Auth (Google) e redirecionamentos.
 
@@ -79,8 +79,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 8 a 14 horas",,Dev5,,Dev6,,,,,,,,,0,56460,,,0|i0010n:00v,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,35.0,,,,{},,Em andamento,09/nov/26 9:24 PM,10953,TR-360,Login
-Formas de Ingresso ,TR-393,10986,Ajuste,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,27/out/26 3:15 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 8 a 14 horas",,Dev3,,Dev3,,,,,,,,,0,56460,,,0|i0010n:00v,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,35.0,,,,{},,Em andamento,09/nov/26 9:24 PM,10953,TR-360,Login
+Formas de Ingresso ,TR-393,10986,Ajuste,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev1,Dev1,Dev3,Dev3,Dev3,Dev3,27/out/26 3:15 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da página de formas de ingresso dedicada ao PROUni, englobando a construção do guia informativo, secções de requisitos, passo a passo da inscrição e linha do tempo interativa com os prazos oficiais.
 
@@ -101,8 +101,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,7320,11340,,,0|i0010n:01,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,20.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
-Contagem e atribuição de story points,TR-455,11080,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,09/nov/26 12:37 AM,11/nov/26 2:46 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 8 a 16 horas",,Dev3,,Dev3,,,,,,,,,7320,11340,,,0|i0010n:01,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,20.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
+Contagem e atribuição de story points,TR-455,11080,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Low,,Dev3,Dev3,Dev3,Dev3,Dev3,Dev3,09/nov/26 12:37 AM,11/nov/26 2:46 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
 
 Revisar o histórico do backlog para pontuar e atribuir story points aos cartões antigos que ainda não possuem estimativa de esforço definida.
 
@@ -118,8 +118,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 2 a 4 horas",,Dev5,,Dev6,,;09/nov/26 1:43 AM;ug:83dec413-28fb-4d85-ba6b-849c9d269afc;7200,,,0,7200,,,0,7200,,,0|i0010n:01i,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,3.0,,,,{},,Em andamento,09/nov/26 6:03 PM,10906,TR-313,Organização projeto
-Tela Visão Geral de Cursos ,TR-346,10939,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,22/out/26 6:17 PM,11/nov/26 3:13 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 2 a 4 horas",,Dev3,,Dev3,,;09/nov/26 1:43 AM;ug:83dec413-28fb-4d85-ba6b-849c9d269afc;7200,,,0,7200,,,0,7200,,,0|i0010n:01i,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,3.0,,,,{},,Em andamento,09/nov/26 6:03 PM,10906,TR-313,Organização projeto
+Tela Visão Geral de Cursos ,TR-346,10939,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev1,Dev1,Dev3,Dev3,Dev3,Dev3,22/out/26 6:17 PM,11/nov/26 3:13 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de visão geral de um curso, abrangendo desde a construção da interface visual no front-end até a integração com os endpoints de back-end para exibição de detalhes, grade curricular e informações institucionais.
 
@@ -137,8 +137,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,19500,,,0|i0010n:02,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,27/out/26 10:03 PM,10938,TR-345,Cursos
-Cursos parecidos,TR-391,10984,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,27/out/26 2:48 PM,11/nov/26 3:13 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 8 a 16 horas",,Dev3,,Dev3,,,,,,,,,0,19500,,,0|i0010n:02,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,27/out/26 10:03 PM,10938,TR-345,Cursos
+Cursos parecidos,TR-391,10984,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev1,Dev1,Dev3,Dev3,Dev3,Dev3,27/out/26 2:48 PM,11/nov/26 3:13 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da secção de cursos parecidos no detalhe do curso, englobando a listagem de recomendações por semelhança, opções de ordenação e a tabela comparativa de diferenças entre as formações.
 
@@ -159,8 +159,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,9000,,,0|i0010n:04,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,20.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
-Cursos,TR-390,10983,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,27/out/26 2:38 PM,11/nov/26 3:13 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 8 a 16 horas",,Dev3,,Dev3,,,,,,,,,0,9000,,,0|i0010n:04,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,20.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
+Cursos,TR-390,10983,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev1,Dev1,Dev3,Dev3,Dev3,Dev3,27/out/26 2:38 PM,11/nov/26 3:13 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de listagem de cursos, englobando a construção do painel avançado de filtros laterais, grelha de cartões informativos, paginação e a integração completa com o back-end.
 
@@ -181,8 +181,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 12 a 24 horas",,Dev5,,Dev6,,,,,,,,,0,15960,,,0|i0010n:06,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,35.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
-Mercado e salários,TR-392,10985,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,27/out/26 2:54 PM,11/nov/26 3:15 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 12 a 24 horas",,Dev3,,Dev3,,,,,,,,,0,15960,,,0|i0010n:06,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,35.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
+Mercado e salários,TR-392,10985,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev1,Dev1,Dev3,Dev3,Dev3,Dev3,27/out/26 2:54 PM,11/nov/26 3:15 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da aba de mercado e salários no detalhe do curso, englobando a construção do dashboard com indicadores financeiros, gráficos de faixa salarial por área de atuação, métricas de empregabilidade, demanda regional e distribuição de vagas.
 
@@ -203,8 +203,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 12 a 24 horas",,Dev5,,Dev6,,,,,,,,,3600,6360,,,0|i0010n:07,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
-Acessar Simulado,TR-408,11001,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 7:37 PM,11/nov/26 3:16 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 12 a 24 horas",,Dev3,,Dev3,,,,,,,,,3600,6360,,,0|i0010n:07,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
+Acessar Simulado,TR-408,11001,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,27/out/26 7:37 PM,11/nov/26 3:16 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de acesso e apresentação do módulo de Simulados, englobando a secção de valor do recurso para assinantes, a pré-visualização de simulados bloqueados, os blocos informativos das quatro áreas do módulo e a secção de comparação/seleção de planos de subscrição (Basic, Plus e Premium).
 
@@ -226,8 +226,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 10 a 20 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:09,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:37 PM,10948,TR-355,Simulado
-Configuração de Simulados,TR-411,11004,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 7:54 PM,11/nov/26 3:16 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 10 a 20 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i0010n:09,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:37 PM,10948,TR-355,Simulado
+Configuração de Simulados,TR-411,11004,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,27/out/26 7:54 PM,11/nov/26 3:16 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de configuração de um novo simulado, englobando a seleção interativa do tamanho/duração, escolha do vestibular de referência, seleção de categorias/matérias, ativação do cronómetro e o painel lateral de resumo em tempo real com o botão de início.
 
@@ -250,8 +250,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:0d,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:54 PM,10948,TR-355,Simulado
-Histórico de Simulados,TR-413,11006,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 7:58 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 14 a 22 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i0010n:0d,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:54 PM,10948,TR-355,Simulado
+Histórico de Simulados,TR-413,11006,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,27/out/26 7:58 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de Revisão de Simulado, englobando o cabeçalho de estatísticas gerais, a barra de navegação rápida por questões colorida por estado (certas, erradas, em branco), os filtros por categoria, o botão de ação ""Refazer só os erros"" e a listagem detalhada das questões com o feedback de resposta do utilizador e gabarito correto.
 
@@ -274,8 +274,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:0f,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:58 PM,10948,TR-355,Simulado
-Simulados,TR-409,11002,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 7:44 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 14 a 22 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i0010n:0f,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:58 PM,10948,TR-355,Simulado
+Simulados,TR-409,11002,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,27/out/26 7:44 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela interna de gestão e histórico de Simulados (Plano Premium), englobando os cards de estatísticas gerais, os filtros de busca/ordenação, a listagem de simulados realizados com o detalhe de acertos por categoria e as opções de revisão ou refacção.
 
@@ -297,8 +297,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,0,38880,,,0|i0010n:0i,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:44 PM,10948,TR-355,Simulado
-Cronometro,TR-356,10949,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,26/out/26 1:03 AM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 14 a 22 horas",,Dev3,,Dev3,,,,,,,,,0,38880,,,0|i0010n:0i,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:44 PM,10948,TR-355,Simulado
+Cronometro,TR-356,10949,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,26/out/26 1:03 AM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de cronómetro e métricas de desempenho, fornecendo um dashboard analítico detalhado com o acompanhamento do tempo de estudo, histórico de ofensivas, métricas por configuração de simulado e ritmo por matéria.
 
@@ -319,8 +319,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 12 a 24 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:0r,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,26/out/26 1:03 AM,10948,TR-355,Simulado
-Ranking,TR-357,10950,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,26/out/26 1:03 AM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 12 a 24 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i0010n:0r,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,26/out/26 1:03 AM,10948,TR-355,Simulado
+Ranking,TR-357,10950,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,26/out/26 1:03 AM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de ranking da plataforma, englobando a construção da interface de classificação e a integração com o back-end para o cálculo e rastreio da posição do utilizador com base nas notas dos simulados.
 
@@ -338,8 +338,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:0v,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,26/out/26 1:03 AM,10948,TR-355,Simulado
-Simulado Questoes,TR-414,11007,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 8:04 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 8 a 16 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i0010n:0v,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,26/out/26 1:03 AM,10948,TR-355,Simulado
+Simulado Questoes,TR-414,11007,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,27/out/26 8:04 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de resolução ativa de questões do simulado, englobando o cabeçalho superior escuro (com o título do simulado, cronômetro regressivo por questão e botão ""Salvar e sair""), a barra de progresso detalhada com paginação numérica de questões, o enunciado com tags temáticas, as alternativas de múltipla escolha (A a E) e os botões de controle de navegação (""Questão anterior"", ""Deixar em branco"" e ""Responder e avançar"").
 
@@ -362,8 +362,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 16 a 24 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:1p,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 8:04 PM,10948,TR-355,Simulado
-Pagina inicial,TR-380,10973,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,26/out/26 9:43 PM,11/nov/26 3:24 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 16 a 24 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i0010n:1p,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 8:04 PM,10948,TR-355,Simulado
+Pagina inicial,TR-380,10973,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,High,,Dev4,Dev4,Dev3,Dev3,Dev3,Dev3,26/out/26 9:43 PM,11/nov/26 3:24 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da Página Inicial da plataforma SAUF BR, criando a interface de apresentação, os blocos de destaque institucionais e os atalhos dinâmicos de navegação para os módulos principais do sistema.
 
@@ -383,8 +383,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,36120,,,0|i001bb:0ar,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,30.0,,,,{},,Itens Pendentes,26/out/26 9:43 PM,10972,TR-379,Pagina inicial
-Tela de Assinaturas,TR-325,10918,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,22/out/26 5:05 PM,11/nov/26 3:07 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 8 a 16 horas",,Dev3,,Dev3,,,,,,,,,0,36120,,,0|i001bb:0ar,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,30.0,,,,{},,Itens Pendentes,26/out/26 9:43 PM,10972,TR-379,Pagina inicial
+Tela de Assinaturas,TR-325,10918,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev4,Dev4,Dev3,Dev3,Dev3,Dev3,22/out/26 5:05 PM,11/nov/26 3:07 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de gerenciamento de assinatura do usuário, englobando desde a estruturação visual no front-end até a integração com os endpoints de back-end e validações de fluxo.
 
@@ -465,8 +465,8 @@ h2. Cenários de Teste
 
 * Mensagem de erro 409 no front
 * Falha de rede
-* Formato padrão de erro",,Dev5,Dev3,Dev6,Dev4,[TR-325]: Tela de Assinaturas;06/nov/26 10:00 AM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;4140,,,0,4140,,,0,41820,,,0|i001bb:0g,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},"27/out/26 9:03 PM;712020:841ce7df-0129-426a-a700-aa6a12826421;[~accountid:712020:600f1a39-9e66-443d-8a20-ad6551411bfa] , boas mudanças. Retorno apenas no Frontend",Em andamento,27/out/26 7:46 PM,10917,TR-324,Usuario
-Universidades ,TR-330,10923,Tarefa,Em Revisão 1,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,22/out/26 5:35 PM,11/nov/26 3:10 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+* Formato padrão de erro",,Dev3,Dev2,Dev3,Dev2,[TR-325]: Tela de Assinaturas;06/nov/26 10:00 AM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;4140,,,0,4140,,,0,41820,,,0|i001bb:0g,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},"27/out/26 9:03 PM;712020:841ce7df-0129-426a-a700-aa6a12826421;[~accountid:712020:600f1a39-9e66-443d-8a20-ad6551411bfa] , boas mudanças. Retorno apenas no Frontend",Em andamento,27/out/26 7:46 PM,10917,TR-324,Usuario
+Universidades ,TR-330,10923,Tarefa,Em Revisão 1,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,High,,Dev5,Dev5,Dev3,Dev3,Dev3,Dev3,22/out/26 5:35 PM,11/nov/26 3:10 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de listagem de universidades, englobando desde a construção da interface visual no front-end até a integração com os endpoints de back-end para consulta e filtragem das instituições.
 
@@ -484,8 +484,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,88800,,,0|i001bb:0li,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,45.0,,,,{},,Em andamento,27/out/26 9:41 AM,10922,TR-329,Universidades
-Universidades Favoritas,TR-417,11010,Tarefa,Em Revisão 1,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,27/out/26 8:18 PM,11/nov/26 3:08 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 8 a 16 horas",,Dev3,,Dev3,,,,,,,,,0,88800,,,0|i001bb:0li,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,45.0,,,,{},,Em andamento,27/out/26 9:41 AM,10922,TR-329,Universidades
+Universidades Favoritas,TR-417,11010,Tarefa,Em Revisão 1,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev5,Dev5,Dev3,Dev3,Dev3,Dev3,27/out/26 8:18 PM,11/nov/26 3:08 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da aba de Universidades dentro da tela de ""Meus Favoritos"", englobando o filtro de ordenação por nota MEC, o botão de ação em lote para comparação (""Comparar universidades""), a listagem de instituições salvas com detalhes de categoria (pública/privada), campi, modalidade, Nota MEC, contagem de cursos, além do painel lateral de comparação rápida de cursos e o widget de alerta de processos seletivos.
 
@@ -509,8 +509,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,0,10260,,,0|i001bb:1,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,04/nov/26 11:28 PM,10917,TR-324,Usuario
-Cursos Favoritos ,TR-416,11009,Tarefa,Em Revisão 1,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,27/out/26 8:17 PM,11/nov/26 3:07 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 14 a 22 horas",,Dev3,,Dev3,,,,,,,,,0,10260,,,0|i001bb:1,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,04/nov/26 11:28 PM,10917,TR-324,Usuario
+Cursos Favoritos ,TR-416,11009,Tarefa,Em Revisão 1,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev5,Dev5,Dev3,Dev3,Dev3,Dev3,27/out/26 8:17 PM,11/nov/26 3:07 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de cursos da tela de ""Meus Favoritos"", englobando as abas de navegação entre Cursos e Universidades, a listagem dos itens salvos com detalhes de modalidade, instituição, notas de corte, valores de mensalidade, avisos de prazos, botões de ação (""Ver curso"" e ""Remover""), o painel lateral de comparação rápida, o widget de alertas de prazos e o snackbar flutuante para desfazer remoções.
 
@@ -534,8 +534,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,0,7320,,,0|i001bb:11,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,05/nov/26 11:31 AM,10917,TR-324,Usuario
-[BE]Desenvolvimento Scraper Calendário,TR-338,10931,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,22/out/26 6:01 PM,11/nov/26 2:39 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 14 a 22 horas",,Dev3,,Dev3,,,,,,,,,0,7320,,,0|i001bb:11,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,05/nov/26 11:31 AM,10917,TR-324,Usuario
+[BE]Desenvolvimento Scraper Calendário,TR-338,10931,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,22/out/26 6:01 PM,11/nov/26 2:39 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
 
 Desenvolver, configurar e testar a rotina de _scraping_ responsável por extrair e absorver as informações do calendário académico das fontes externas, estruturando os dados para alimentar o back-end e a base de dados do projeto.
 
@@ -554,8 +554,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 6 a 12 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i001bb:15,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,15.0,,,,{},,Itens Pendentes,22/out/26 6:01 PM,10665,TR-158,Scrapings
-Meu Acompanhamento,TR-415,11008,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,27/out/26 8:11 PM,11/nov/26 3:07 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 6 a 12 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i001bb:15,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,15.0,,,,{},,Itens Pendentes,22/out/26 6:01 PM,10665,TR-158,Scrapings
+Meu Acompanhamento,TR-415,11008,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev5,Dev5,Dev3,Dev3,Dev3,Dev3,27/out/26 8:11 PM,11/nov/26 3:07 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de ""Meu Acompanhamento"" (Plano Premium), englobando os cartões de indicadores superiores, os filtros temporais e por vestibular, o gráfico de evolução do aproveitamento, o gráfico de acertos e erros, o detalhamento de acertos por categoria com variação mensal, o painel de recomendações ""Onde focar agora"" e o histórico de constância de estudo.
 
@@ -581,8 +581,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 18 a 28 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i001bb:3,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Itens Pendentes,27/out/26 10:03 PM,10917,TR-324,Usuario
-Implementar integração de pagamento e checkout via Stripe,TR-336,10929,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,22/out/26 5:51 PM,11/nov/26 3:12 PM,03/nov/26 8:17 PM,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 18 a 28 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i001bb:3,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Itens Pendentes,27/out/26 10:03 PM,10917,TR-324,Usuario
+Implementar integração de pagamento e checkout via Stripe,TR-336,10929,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,High,,Dev5,Dev5,Dev3,Dev3,Dev3,Dev3,22/out/26 5:51 PM,11/nov/26 3:12 PM,03/nov/26 8:17 PM,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Configurar e implementar a integração completa com o gateway de pagamento Stripe, englobando a criação de rotinas no back-end, fluxos de checkout e tratamento de webhooks para processamento de transações e assinaturas.
 
@@ -602,8 +602,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 5 a 10 horas",,Dev5,,Dev6,,,,,,,,,0,8220,,,0|i001bb:3v,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,20.0,,,,{},,Em andamento,27/out/26 8:15 PM,10928,TR-335,Sistema de Pagamento
-Universidades visão geral,TR-331,10924,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev11,Dev12,Dev5,Dev6,Dev5,Dev6,22/out/26 5:35 PM,11/nov/26 3:11 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 5 a 10 horas",,Dev3,,Dev3,,,,,,,,,0,8220,,,0|i001bb:3v,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,20.0,,,,{},,Em andamento,27/out/26 8:15 PM,10928,TR-335,Sistema de Pagamento
+Universidades visão geral,TR-331,10924,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Medium,,Dev6,Dev6,Dev3,Dev3,Dev3,Dev3,22/out/26 5:35 PM,11/nov/26 3:11 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
 
 Implementar o ciclo de vida completo da tela de visão geral de uma universidade, abrangendo a estruturação da interface de detalhes, consumo de dados específicos da instituição e respetivas interações do utilizador.
 
@@ -621,8 +621,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,20520,,,0|i001bb:3x,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,30.0,,,,{},,Em andamento,30/out/26 7:27 PM,10922,TR-329,Universidades
-Finalização dos scrapers das universidades,TR-424,11017,Tarefa,Concluído,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,Itens concluídos,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,31/out/26 3:52 PM,11/nov/26 2:40 PM,,11/nov/26 9:07 AM,15/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 8 a 16 horas",,Dev3,,Dev3,,,,,,,,,0,20520,,,0|i001bb:3x,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,30.0,,,,{},,Em andamento,30/out/26 7:27 PM,10922,TR-329,Universidades
+Finalização dos scrapers das universidades,TR-424,11017,Tarefa,Concluído,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,High,Itens concluídos,Dev2,Dev2,Dev3,Dev3,Dev3,Dev3,31/out/26 3:52 PM,11/nov/26 2:40 PM,,11/nov/26 9:07 AM,15/nov/26 12:00 AM,0,"h2. O que fazer
 
 Desenvolver, finalizar e validar os scripts de _scraping_ para a recolha automatizada de dados das universidades selecionadas (UEM, UEL, UFSC, UTFPR e UFSM), garantindo a persistência correta das informações na base de dados e o suporte ao backend da plataforma.
 
@@ -642,8 +642,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 16 a 32 horas",,Dev5,,Dev6,,[TR-424]: Finalização dos scrapers das universidades;01/nov/26 11:03 AM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;3600,[TR-424]: Finalização dos scrapers das universidades;07/nov/26 12:20 AM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;6360,,0,9960,,,0,9960,,,0|i001bb:f,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,4.0,,,,{},,Itens concluídos,11/nov/26 9:07 AM,10665,TR-158,Scrapings
-Organização Jira Transição,TR-315,10908,Tarefa,Concluído,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,Itens concluídos,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,21/out/26 8:51 PM,10/nov/26 3:46 PM,,09/nov/26 1:39 AM,18/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 16 a 32 horas",,Dev3,,Dev3,,[TR-424]: Finalização dos scrapers das universidades;01/nov/26 11:03 AM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;3600,[TR-424]: Finalização dos scrapers das universidades;07/nov/26 12:20 AM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;6360,,0,9960,,,0,9960,,,0|i001bb:f,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,4.0,,,,{},,Itens concluídos,11/nov/26 9:07 AM,10665,TR-158,Scrapings
+Organização Jira Transição,TR-315,10908,Tarefa,Concluído,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Low,Itens concluídos,Dev3,Dev3,Dev3,Dev3,Dev3,Dev3,21/out/26 8:51 PM,10/nov/26 3:46 PM,,09/nov/26 1:39 AM,18/nov/26 12:00 AM,0,"h2. O que fazer
 
 Revisar, padronizar e atualizar todos os cards antigos e da sprint atual no Jira (seguindo o modelo simplificado de histórias, tarefas e bugs), além de garantir que estejam devidamente estruturados e conectados aos seus respectivos épicos ativos.
 
@@ -655,8 +655,8 @@ h2. Está pronto quando
 
 * -Todos os cards antigos e da sprint atual foram revisados e ajustados para o padrão simplificado (títulos, descrições e subtarefas).-
 * -Cada card está corretamente vinculado ao seu respectivo épico ativo.-
-* -Os status e as labels (como {{frontend}} ou {{backend}}) estão corretos e atualizados.-",,Dev5,,Dev6,,,,,,,,,0,66000,,,0|i001bb:i,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Itens concluídos,09/nov/26 1:39 AM,10906,TR-313,Organização projeto
-Organizar Repositorio,TR-432,11025,Tarefa,Concluído,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,Itens concluídos,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,01/nov/26 11:03 AM,10/nov/26 3:46 PM,,09/nov/26 12:40 AM,09/nov/26 12:00 AM,0,"h2. O que fazer
+* -Os status e as labels (como {{frontend}} ou {{backend}}) estão corretos e atualizados.-",,Dev3,,Dev3,,,,,,,,,0,66000,,,0|i001bb:i,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Itens concluídos,09/nov/26 1:39 AM,10906,TR-313,Organização projeto
+Organizar Repositorio,TR-432,11025,Tarefa,Concluído,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Low,Itens concluídos,Dev3,Dev3,Dev3,Dev3,Dev3,Dev3,01/nov/26 11:03 AM,10/nov/26 3:46 PM,,09/nov/26 12:40 AM,09/nov/26 12:00 AM,0,"h2. O que fazer
 
 Estruturar, organizar e centralizar toda a documentação oficial e exigida pelo projeto (como diagramas, ADRs, termos e especificações) dentro do repositório de forma limpa, acessível e padronizada.
 
@@ -676,8 +676,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 4 a 8 horas",,Dev5,,Dev6,,,,,,,,,7200,7560,,,0|i001rg:zvr,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,5.0,,,,{},,Itens concluídos,09/nov/26 12:40 AM,10615,TR-133,Artefatos
-Organização das dailies ,TR-456,11081,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,09/nov/26 12:39 AM,11/nov/26 2:49 PM,,,16/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 4 a 8 horas",,Dev3,,Dev3,,,,,,,,,7200,7560,,,0|i001rg:zvr,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,5.0,,,,{},,Itens concluídos,09/nov/26 12:40 AM,10615,TR-133,Artefatos
+Organização das dailies ,TR-456,11081,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Low,,Dev3,Dev3,Dev3,Dev3,Dev3,Dev3,09/nov/26 12:39 AM,11/nov/26 2:49 PM,,,16/nov/26 12:00 AM,0,"h2. O que fazer
 
 Estruturar o formato oficial das reuniões diárias (dailies), regularizando o registo retroativo e a contabilização de horas de alinhamento previamente não computadas no projeto.
 
@@ -695,8 +695,8 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 2 a 4 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i001rg:zyg,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,2.0,,,,{},,Itens Pendentes,09/nov/26 12:39 AM,10906,TR-313,Organização projeto
-Planning Sprint 7,TR-443,11036,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,,,,Dev5,Dev6,Dev5,Dev6,04/nov/26 8:28 PM,11/nov/26 3:00 PM,04/nov/26 9:21 PM,,14/nov/26 12:00 AM,0,"h2. O que fazer
+* *Esforço estimado:* 2 a 4 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i001rg:zyg,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,2.0,,,,{},,Itens Pendentes,09/nov/26 12:39 AM,10906,TR-313,Organização projeto
+Planning Sprint 7,TR-443,11036,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,Low,,,,Dev3,Dev3,Dev3,Dev3,04/nov/26 8:28 PM,11/nov/26 3:00 PM,04/nov/26 9:21 PM,,14/nov/26 12:00 AM,0,"h2. O que fazer
 
 Conduzir a reunião de planeamento da sprint com a equipa, selecionando e comprometendo os itens do backlog para o próximo ciclo de entrega.
 
@@ -713,9 +713,9 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 2 a 4 horas",,Dev5,,Dev6,,[TR-443]: Planning Sprint 7;04/nov/26 9:43 PM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;7200,,,0,7200,,,0,30600,,,0|i001rg:zyx,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,15.0,,,,{},,Em andamento,04/nov/26 10:47 PM,10913,TR-320,Cerimônias do SCRUM
-Desenvolvimento do agente de gestão de projetos,TR-294,10887,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,,,Dev1,Dev2,Dev1,Dev2,15/out/26 8:25 PM,11/nov/26 3:01 PM,,,13/nov/26 12:00 AM,0,,,Dev1,,Dev2,,,,,,,,,,,,,0|i001rh:,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,5.0,,,,{},,Itens Pendentes,15/out/26 8:25 PM,10914,TR-321,Desenvolvimento de ferramentas 
-Elaboração do Cronograma,TR-470,11095,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,11/nov/26 2:32 PM,12/nov/26 10:54 AM,,,,0,"h2. O que fazer
+* *Esforço estimado:* 2 a 4 horas",,Dev3,,Dev3,,[TR-443]: Planning Sprint 7;04/nov/26 9:43 PM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;7200,,,0,7200,,,0,30600,,,0|i001rg:zyx,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,15.0,,,,{},,Em andamento,04/nov/26 10:47 PM,10913,TR-320,Cerimônias do SCRUM
+Desenvolvimento do agente de gestão de projetos,TR-294,10887,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,High,,,,Dev1,Dev1,Dev1,Dev1,15/out/26 8:25 PM,11/nov/26 3:01 PM,,,13/nov/26 12:00 AM,0,,,Dev1,,Dev1,,,,,,,,,,,,,0|i001rh:,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,5.0,,,,{},,Itens Pendentes,15/out/26 8:25 PM,10914,TR-321,Desenvolvimento de ferramentas 
+Elaboração do Cronograma,TR-470,11095,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev1,,High,,Dev3,Dev3,Dev3,Dev3,Dev3,Dev3,11/nov/26 2:32 PM,12/nov/26 10:54 AM,,,,0,"h2. O que fazer
 
 Elaborar, detalhar e estruturar o cronograma oficial do projeto, definindo prazos, marcos (milestones), distribuição de épicos e o planeamento temporal das entregas e sprints.
 
@@ -733,4 +733,4 @@ h2. Está pronto quando
 
 h2. Estimativa de Tempo
 
-* *Esforço estimado:* 4 a 8 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i002o2:,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,8.0,,,,{},,Itens Pendentes,11/nov/26 2:32 PM,10906,TR-313,Organização projeto
+* *Esforço estimado:* 4 a 8 horas",,Dev3,,Dev3,,,,,,,,,,,,,0|i002o2:,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,8.0,,,,{},,Itens Pendentes,11/nov/26 2:32 PM,10906,TR-313,Organização projeto

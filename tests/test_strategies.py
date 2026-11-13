@@ -35,9 +35,13 @@ def test_contagens_simples():
     assert AdjustmentTasksStrategy().calculate(tasks).value == 1
 
 
-def test_taxa_retrabalho_sem_concluidas_nao_divide_por_zero():
+def test_taxa_retrabalho_sem_concluidas_retorna_none():
+    """Sem concluídas = 0/0 indefinido. Convenção: retornar None
+    (o CsvWriter grava 'N/A'). Nunca 0%, pois seria enganoso."""
     tasks = [_t("A", TaskStatus.CANCELADA, type_=TaskType.AJUSTE)]
-    assert ReworkRateStrategy().calculate(tasks).value == 0.0
+    result = ReworkRateStrategy().calculate(tasks)
+    assert result.value is None
+    assert "não aplicável" in result.detail["nota"]
 
 
 def test_taxa_retrabalho_percentual():

@@ -140,22 +140,41 @@ def grafico_taxa_acerto(metricas: list[dict]) -> Path:
 
 
 # ---------------------------- 5. Consolidação (seção 4 do modelo)
-def grafico_consolidacao(metricas: list[dict]) -> Path:
-    """Barras agrupadas: nº testes / taxa sucesso / tempo médio."""
-    n_testes = len(metricas)
-    taxa_media = sum(float(m["taxa_acerto_%"]) for m in metricas) / n_testes
-    tempo_medio_ms = sum(float(m["duracao_seg"]) for m in metricas) / n_testes * 1000
+# Classificação dos cenários por tipo — define a estrutura do gráfico 5.
+TIPOS = {
+    "típico":   ["C1_tipico_sprint_feliz", "C2_sprint_com_retrabalho"],
+    "borda":    ["C3_tarefas_canceladas_e_backlog", "C4_status_pt_br_misto",
+                 "C5_borda_vazio", "C6_meta_1000h_aderente"],
+    "real":     ["C7_jira_real_anonimizado"],
+}
 
-    labels = ["Nº de casos", "Taxa de sucesso (%)", "Tempo médio (ms)"]
-    valores = [n_testes, round(taxa_media, 2), round(tempo_medio_ms, 2)]
+
+def grafico_consolidacao(metricas: list[dict]) -> Path:
+    """Taxa de sucesso por tipo de cenário (única unidade = %).
+
+    Substitui a versão anterior que misturava Nº, % e ms no mesmo eixo.
+    Classifica os cenários em 3 grupos (típico/borda/real) e mostra a
+    média da taxa de acerto de cada grupo."""
+    por_nome = {m["cenario"]: float(m["taxa_acerto_%"]) for m in metricas}
+
+    labels, valores, contagens = [], [], []
+    for tipo, cenarios in TIPOS.items():
+        taxas = [por_nome[c] for c in cenarios if c in por_nome]
+        if not taxas:
+            continue
+        labels.append(f"{tipo.capitalize()} (n={len(taxas)})")
+        valores.append(round(sum(taxas) / len(taxas), 2))
+        contagens.append(len(taxas))
 
     fig, ax = plt.subplots(figsize=(7, 4.5))
-    bars = ax.bar(labels, valores, color=["#4C78A8", "#54A24B", "#72B7B2"])
-    ax.set_title("Consolidação do Agente de Gestão — Entrega 2")
+    bars = ax.bar(labels, valores, color=["#4C78A8", "#F58518", "#54A24B"])
+    ax.axhline(100, color="#CCCCCC", linestyle="--", linewidth=1)
+    ax.set_title("Taxa de sucesso por tipo de cenário — Agente de Gestão")
+    ax.set_ylabel("Taxa de sucesso (%)")
+    ax.set_ylim(0, 110)
     for bar, v in zip(bars, valores):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() * 1.02,
-                f"{v}", ha="center", va="bottom", fontweight="bold")
-    ax.set_ylim(0, max(valores) * 1.2)
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 2,
+                f"{v:.0f}%", ha="center", va="bottom", fontweight="bold")
     fig.tight_layout()
     path = OUT_DIR / "05_consolidacao.png"
     fig.savefig(path)
