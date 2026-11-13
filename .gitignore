@@ -1,0 +1,30 @@
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# ----- IDE / SO -----
+.DS_Store
+.idea/
+.vscode/
+
+# ----- Testes / cobertura -----
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ----- Artefatos gerados (não versionar) -----
+data/output/
+
+# Documento final + gráficos ficam fora do repo (enviados direto na plataforma)
+entrega_2/
+
+# Lock temporário do Word ao abrir o .docx
+~$*
+
+# ----- Dados brutos reais (apenas a fixture ANON vai para o git) -----
+Jira.csv
+*.jira.csv

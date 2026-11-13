@@ -1,0 +1,736 @@
+Resumo,Chave da item,ID da item,Tipo de item,Status,Chave do projeto,Nome do projeto,Tipo de projeto,Líder do projeto,ID do líder do projeto,Descrição do projeto,Prioridade,Resolução,Responsável,ID do responsável,Relator,ID do relator,Criador,ID do criador,Criado,Atualizado(a),Última visualização,Resolvido,Data de entrega,Votos,Descrição,Ambiente,Seguidores,Seguidores,ID dos seguidores,ID dos seguidores,Registro de Trabalho,Registro de Trabalho,Estimativa original,Estimativa de trabalho restante,Tempo gasto,Razão Trabalhada,Σ da Estimativa Original,Σ Estimativa de trabalho restante,Σ de Tempo Gasto,Nível de Segurança,Campo personalizado (Atlassian Project),Campo personalizado (Classificação),Campo personalizado (Comentários),Campo personalizado (Cor do item),Campo personalizado (Data de início),Campo personalizado (Design file),Campo personalizado (Designs ready),Campo personalizado (Documents),Campo personalizado (Effort),Campo personalizado (Idea short description),Campo personalizado (Ideia arquivada),Campo personalizado (Ideia arquivada em),Campo personalizado (Impact),Campo personalizado (Insights),Campo personalizado (Objetivos),Campo personalizado (Progresso da entrega),Campo personalizado (Project start),Campo personalizado (Project target),Campo personalizado (Projeto da Atlassian),Campo personalizado (Roadmap),Campo personalizado (Score),Sprint,Sprint,Campo personalizado (State),Campo personalizado (Status da entrega),Campo personalizado (Status do Projeto da Atlassian),Campo personalizado (Story point estimate),Campo personalizado (Team),Campo personalizado (Tickets vinculados),Campo personalizado (Vulnerabilidade),Campo personalizado (development),Comentar,Categoria do status,Categoria do status alterada,Pai,Chave pai,Parent summary
+Avaliação de Scraper banco de questões ENEM,TR-340,10933,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,22/out/26 6:02 PM,10/nov/26 5:37 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+
+Conduzir a avaliação, auditoria e validação da rotina de _scraping_ voltada à extração do banco de questões, verificando a qualidade, precisão e integridade dos dados recolhidos para a plataforma.
+
+h2. Escopo
+
+* Execução de testes de validação na extração do banco de questões para identificar falhas, dados corrompidos ou lacunas nas perguntas e alternativas.
+* Análise do formato e estruturação dos dados recolhidos em comparação com o modelo esperado pelo banco de dados e backend.
+* Ajustes pontuais ou mapeamento de melhorias necessárias no script do scraper para garantir a confiabilidade das questões.
+
+h2. Está pronto quando
+
+* -O scraper do banco de questões foi testado e avaliado quanto à precisão dos dados extraídos.-
+* -A integridade das questões, enunciados e alternativas foi confirmada e validada.-
+* O relatório de avaliação ou os ajustes necessários foram concluídos e aprovados pela equipa.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 4 a 8 horas",,Dev5,,Dev6,,,,,,,,,0,15420,,,0|i0010n:00i,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,6.0,,,,{},,Em andamento,08/nov/26 9:16 AM,10665,TR-158,Scrapings
+Tela de Perfil do Usuario,TR-326,10919,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,22/out/26 5:05 PM,11/nov/26 3:07 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de perfil (tanto para a visualização do próprio utilizador quanto para visitantes), abrangendo a construção da interface, integração com os endpoints de back-end e validação dos fluxos de dados.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end da tela de perfil, garantindo a adaptação correta dos estados para utilizador autenticado e visitante.
+* Implementação da lógica de comunicação com o back-end para consulta, atualização de dados cadastrais e preferências.
+* Realização de testes integrados e validação dos cenários de visualização e edição de perfil.
+
+h2. Está pronto quando
+
+* -A interface da tela de perfil foi desenvolvida e adaptada tanto para o utilizador quanto para visitantes.-
+* A integração com o back-end para recuperação e atualização das informações de perfil está funcional.
+* Os testes da tela e dos fluxos associados foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,14400,,,0|i0010n:00r,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,09/nov/26 8:06 PM,10917,TR-324,Usuario
+Registo - Etapa 1 de 2,TR-362,10955,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,26/out/26 7:54 PM,11/nov/26 3:19 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar a primeira etapa da tela de criação de conta (Etapa 1 de 2), focada na recolha e validação inicial do nome completo, e-mail e palavra-passe com indicador visual de força da palavra-passe.
+
+h2. Escopo
+
+* Construção do layout front-end para a Etapa 1 (campos para Nome completo, E-mail e Palavra-passe com funcionalidade ""Mostrar"").
+* Implementação do validador visual de força da palavra-passe (mínimo de 8 caracteres, com letra e número) e indicação de nível de segurança (ex: ""Boa"").
+* Validação no front-end e comunicação com o back-end para verificação de disponibilidade do e-mail inserido.
+* Transição fluida de dados para a Etapa 2 ao clicar no botão ""Continuar"" e ligação para a tela de Login (""Já tem conta? Entrar"").
+
+h2. Está pronto quando
+
+* A interface da Etapa 1 de criação de conta foi desenvolvida de acordo com o layout visual.
+* A validação em tempo real da palavra-passe (mínimo de 8 caracteres, letra e número) e a barra de força estão operacionais.
+* A validação de e-mail e a navegação para a Etapa 2 estão a funcionar corretamente.
+* Os testes unitários e de interface foram validados com sucesso.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 6 a 10 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:00t,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Em andamento,09/nov/26 9:24 PM,10953,TR-360,Login
+Login,TR-361,10954,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,26/out/26 7:54 PM,11/nov/26 3:21 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de Login, englobando a interface visual, autenticação tradicional via e-mail e palavra-passe, opção de visibilidade da palavra-passe, funcionalidade ""Manter conectado"", integração com Social Auth (Google) e redirecionamentos.
+
+h2. Escopo
+
+* Construção do layout front-end conforme o design (campos de e-mail, palavra-passe, botão de ""Mostrar/Ocultar"", opção ""Manter conectado neste dispositivo"", botão ""Entrar com Google"" e atalhos para recuperação de palavra-passe e registo).
+* Integração com o endpoint de autenticação do back-end (validação de credenciais, geração de tokens JWT/sessão e persistência do login quando selecionado).
+* Implementação da integração inicial para autenticação via conta Google (SSO).
+* Tratamento de mensagens de erro (credenciais inválidas, campos obrigatórios) e testes integrados da tela.
+
+h2. Está pronto quando
+
+* A interface da tela de Login foi desenvolvida exatamente conforme o protótipo.
+* O fluxo de login tradicional via e-mail e palavra-passe está funcional e integrado ao back-end.
+* A funcionalidade de exibir/ocultar palavra-passe e a opção ""Manter conectado"" estão operacionais.
+* O botão ""Entrar com Google"" redireciona e autentica corretamente o utilizador.
+* Os testes da tela e dos cenários de falha/sucesso foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 14 horas",,Dev5,,Dev6,,,,,,,,,0,56460,,,0|i0010n:00v,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,35.0,,,,{},,Em andamento,09/nov/26 9:24 PM,10953,TR-360,Login
+Formas de Ingresso ,TR-393,10986,Ajuste,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,27/out/26 3:15 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da página de formas de ingresso dedicada ao PROUni, englobando a construção do guia informativo, secções de requisitos, passo a passo da inscrição e linha do tempo interativa com os prazos oficiais.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end da página do PROUni, incluindo o sumário de navegação lateral (""Nesta página"") e o cabeçalho com a data da última atualização.
+* Implementação dos cartões de resumo em destaque (nota mínima no ENEM, renda familiar para bolsa 100% e custo da inscrição).
+* Construção das secções informativas de ""Quem pode participar"" (com critérios validados por itens visuais), o fluxo explicativo de ""Como se inscrever, passo a passo"" (etapas 01 a 04) e a linha do tempo interativa com os ""Prazos de 2026"" (inscrições, resultados, comprovação e lista de espera).
+* Integração com os endpoints de back-end para recuperação dinâmica dos dados do guia, regras e calendários oficiais do programa.
+* Realização de testes integrados e validação da usabilidade e renderização correta das informações na interface.
+
+h2. Está pronto quando
+
+* A interface da página do PROUni foi desenvolvida e está visualmente alinhada com os padrões de design do guia de ingresso.
+* Os cartões de resumo, requisitos, passo a passo e o componente de linha do tempo com os prazos estão funcionais e a exibir os dados corretos.
+* A integração com o back-end para suporte ao conteúdo dinâmico está operacional.
+* Os testes da tela e dos fluxos associados foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,7320,11340,,,0|i0010n:01,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,20.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
+Contagem e atribuição de story points,TR-455,11080,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,09/nov/26 12:37 AM,11/nov/26 2:46 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+
+Revisar o histórico do backlog para pontuar e atribuir story points aos cartões antigos que ainda não possuem estimativa de esforço definida.
+
+h2. Escopo
+
+* Identificação dos cartões antigos sem pontuação no Jira.
+* Atribuição de story points com base na complexidade e esforço estimado.
+
+h2. Está pronto quando
+
+* Todos os cartões antigos identificados possuem story points atribuídos.
+* O backlog está limpo e padronizado para as próximas sprints.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 2 a 4 horas",,Dev5,,Dev6,,;09/nov/26 1:43 AM;ug:83dec413-28fb-4d85-ba6b-849c9d269afc;7200,,,0,7200,,,0,7200,,,0|i0010n:01i,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,3.0,,,,{},,Em andamento,09/nov/26 6:03 PM,10906,TR-313,Organização projeto
+Tela Visão Geral de Cursos ,TR-346,10939,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,22/out/26 6:17 PM,11/nov/26 3:13 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de visão geral de um curso, abrangendo desde a construção da interface visual no front-end até a integração com os endpoints de back-end para exibição de detalhes, grade curricular e informações institucionais.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end para a página de detalhes/visão geral do curso selecionado, seguindo o protótipo e os padrões visuais.
+* Implementação da lógica de comunicação com o back-end para recuperar dados aprofundados sobre o curso (como descrição, duração, modalidade e requisitos).
+* Realização de testes integrados e validação da navegação e renderização das informações na tela.
+
+h2. Está pronto quando
+
+* -A interface da tela de visão geral do curso foi desenvolvida e exibe corretamente todos os detalhes estruturais.-
+* A integração com o back-end para obtenção das informações específicas do curso está funcional.
+* Os testes da tela e dos fluxos associados foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,19500,,,0|i0010n:02,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,27/out/26 10:03 PM,10938,TR-345,Cursos
+Cursos parecidos,TR-391,10984,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,27/out/26 2:48 PM,11/nov/26 3:13 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da secção de cursos parecidos no detalhe do curso, englobando a listagem de recomendações por semelhança, opções de ordenação e a tabela comparativa de diferenças entre as formações.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end da aba ""Cursos parecidos"", incluindo os cartões informativos com a percentagem de semelhança, modalidade, semestres, universidades na região e nota de corte.
+* Implementação da funcionalidade de ordenação dinâmica das recomendações (ex: por semelhança).
+* Construção da tabela comparativa ""O que muda entre eles"", contrastando o curso atual com as alternativas com base em duração, corte SISU e atuação principal.
+* Integração com os endpoints de back-end para cálculo de recomendação e recuperação dos dados comparativos entre os cursos.
+* Realização de testes integrados e validação da precisão das comparações e navegação para os detalhes dos cursos recomendados.
+
+h2. Está pronto quando
+
+* A interface da aba de cursos parecidos foi desenvolvida e exibe corretamente os cartões de recomendação com respetivas percentagens.
+* A tabela comparativa ""O que muda entre eles"" está funcional, estruturada e integrada com os dados corretos.
+* A ordenação e a integração com o back-end para suporte às recomendações estão operacionais.
+* Os testes da tela e dos fluxos associados foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,9000,,,0|i0010n:04,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,20.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
+Cursos,TR-390,10983,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,27/out/26 2:38 PM,11/nov/26 3:13 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de listagem de cursos, englobando a construção do painel avançado de filtros laterais, grelha de cartões informativos, paginação e a integração completa com o back-end.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end da listagem de cursos, incluindo o layout em grelha com os cartões informativos (título, modalidade, semestres, universidades na região, nota de corte do SISU e botão de acesso aos detalhes).
+* Implementação do painel lateral de filtros dinâmicos por categoria (Saúde, Tecnologia, Educação), modalidade (Presencial, Semipresencial, EaD), intervalo de nota de corte e duração (semestres).
+* Construção do componente de paginação e contadores dinâmicos de resultados.
+* Integração com os endpoints de back-end para filtragem em tempo real, paginação e listagem otimizada dos cursos.
+* Realização de testes integrados e validação dos fluxos de pesquisa e filtragem de dados.
+
+h2. Está pronto quando
+
+* A interface da tela de listagem de cursos foi desenvolvida e está visualmente alinhada com os padrões de design.
+* O painel de filtros laterais e a grelha de cartões funcionam corretamente de forma interativa.
+* A integração com o back-end para obtenção e filtragem dos dados dos cursos está funcional.
+* Os testes da tela, paginação e fluxos associados foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 12 a 24 horas",,Dev5,,Dev6,,,,,,,,,0,15960,,,0|i0010n:06,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,35.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
+Mercado e salários,TR-392,10985,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev1,Dev2,Dev5,Dev6,Dev5,Dev6,27/out/26 2:54 PM,11/nov/26 3:15 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da aba de mercado e salários no detalhe do curso, englobando a construção do dashboard com indicadores financeiros, gráficos de faixa salarial por área de atuação, métricas de empregabilidade, demanda regional e distribuição de vagas.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end da aba ""Mercado e salários"", incluindo os cartões de resumo (salário inicial médio, média com 5 anos e empregabilidade em 12 meses).
+* Implementação da secção de ""Faixa salarial por área de atuação"" com representação gráfica e intervalos salariais detalhados (ex: Análises clínicas, Pesquisa e docência, Indústria farmacêutica, Vigilância sanitária).
+* Construção dos painéis laterais e inferiores informativos, como a ""Demanda regional"", os requisitos de ""Registro profissional"" (ex: CRBM) e a distribuição percentual de ""Onde estão as vagas"".
+* Integração com os endpoints de back-end para recolha, processamento e exibição dinâmica dos dados estatísticos e salariais do curso.
+* Realização de testes integrados e validação da precisão dos dados estatísticos apresentados no painel.
+
+h2. Está pronto quando
+
+* A interface do dashboard de mercado e salários foi desenvolvida e está visualmente alinhada com os padrões de design.
+* Os gráficos de faixa salarial, indicadores de empregabilidade e cartões de distribuição de vagas estão a exibir corretamente as informações.
+* A integração com o back-end para suporte aos dados estatísticos e regionais está operacional.
+* Os testes da tela e dos fluxos de visualização analítica foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 12 a 24 horas",,Dev5,,Dev6,,,,,,,,,3600,6360,,,0|i0010n:07,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Em andamento,27/out/26 10:02 PM,10938,TR-345,Cursos
+Acessar Simulado,TR-408,11001,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 7:37 PM,11/nov/26 3:16 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de acesso e apresentação do módulo de Simulados, englobando a secção de valor do recurso para assinantes, a pré-visualização de simulados bloqueados, os blocos informativos das quatro áreas do módulo e a secção de comparação/seleção de planos de subscrição (Basic, Plus e Premium).
+
+h2. Escopo
+
+* Desenvolvimento do layout front-end da página principal de simulados, incluindo o banner de chamada à ação (""Assinar para acessar"" e ""Comparar planos"").
+* Implementação da pré-visualização interativa (card lateral com o estado bloqueado por subscrição e listagem de simulados anteriores com percentagens de acerto).
+* Construção dos quatro blocos informativos detalhando as áreas do módulo: Simulados, Meu acompanhamento, Cronómetro e Ranking.
+* Estruturação do componente de planos de assinatura (Basic a R$ 8/mês, Plus a R$ 12/mês e Premium completo a R$ 15/mês) com respetivos botões de escolha de plano.
+* Integração com os endpoints de back-end para verificar o estado da assinatura do utilizador e renderizar os conteúdos de acordo com o plano ativo.
+* Realização de testes de interface, responsividade e validação do fluxo de redirecionamento para o checkout ou planos.
+
+h2. Está pronto quando
+
+* A interface da tela de Acesso a Simulados foi desenvolvida exatamente conforme o protótipo.
+* A pré-visualização dos simulados e os cartões das quatro áreas informativas estão interativos e visuais.
+* O componente de exibição dos planos de subscrição (Basic, Plus, Premium) e respetivos valores está funcional.
+* A verificação de permissões do utilizador (assinante vs não assinante) e os testes da tela foram concluídos com sucesso.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 10 a 20 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:09,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:37 PM,10948,TR-355,Simulado
+Configuração de Simulados,TR-411,11004,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 7:54 PM,11/nov/26 3:16 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de configuração de um novo simulado, englobando a seleção interativa do tamanho/duração, escolha do vestibular de referência, seleção de categorias/matérias, ativação do cronómetro e o painel lateral de resumo em tempo real com o botão de início.
+
+h2. Escopo
+
+* Desenvolvimento do layout front-end da página de configuração dividida por etapas (1. Tamanho do simulado, 2. Vestibular, 3. Categorias, 4. Tempo).
+* Implementação dos seletores interativos de tamanho (Rápida - 10 questões, Média - 20 questões, Longa - 30 questões).
+* Construção das opções de seleção de vestibular (ENEM, Vestibular UEM, UTFPR, UEL, Misturar todos) e grelha de categorias de matérias com opção de ""Selecionar todas"".
+* Criação do seletor/toggle para a opção de cronometrar o simulado (com limite por questão).
+* Implementação do painel lateral fixo de ""Resumo"" que atualiza dinamicamente as escolhas do utilizador (Tamanho, Vestibular, Categorias e Tempo estimado) e o botão de ação ""Começar simulado"".
+* Integração com os endpoints de back-end para gerar e iniciar a sessão do novo simulado com base nos parâmetros configurados.
+* Realização de testes de interface, responsividade e validação do fluxo completo de configuração.
+
+h2. Está pronto quando
+
+* A interface da tela de Configuração de Novo Simulado foi desenvolvida exatamente conforme o protótipo.
+* As seleções de tamanho, vestibular, categorias e o toggle de cronómetro atualizam corretamente o painel lateral de resumo em tempo real.
+* Os botões de ação (""Começar simulado"" e ""Cancelar"") estão totalmente funcionais com os devidos redirecionamentos.
+* A integração de dados com o back-end para a criação do simulado e os testes da tela foram concluídos com sucesso.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:0d,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:54 PM,10948,TR-355,Simulado
+Histórico de Simulados,TR-413,11006,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 7:58 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de Revisão de Simulado, englobando o cabeçalho de estatísticas gerais, a barra de navegação rápida por questões colorida por estado (certas, erradas, em branco), os filtros por categoria, o botão de ação ""Refazer só os erros"" e a listagem detalhada das questões com o feedback de resposta do utilizador e gabarito correto.
+
+h2. Escopo
+
+* Desenvolvimento do layout front-end da página de revisão, incluindo o painel superior com a percentagem de acertos, contagem total de acertos, erros e questões em branco.
+* Implementação da barra superior de navegação/progresso segmentada por questão e codificada por cores (verde para acertos, vermelho para erros, cinza/bege para em branco).
+* Construção do seletor de filtros por categoria e do botão de ação rápida para ""Refazer só os erros"".
+* Criação dos componentes de exibição de questões detalhadas, contemplando o enunciado, etiquetas de matéria/tópico (ex: Matemática - Porcentagem, Física - Eletricidade), tempo de resposta por questão, a resposta submetida pelo utilizador (correta, incorreta ou não respondida) e a indicação da resposta correta com o respetivo gabarito/explicação.
+* Implementação do botão de paginação/expansão para ver as restantes questões do simulado.
+* Integração com os endpoints de back-end para recuperação dos dados detalhados da tentativa do simulado e subscrição da rota de refacção de erros.
+* Realização de testes de interface, responsividade e validação do comportamento dos filtros de revisão.
+
+h2. Está pronto quando
+
+* A interface da tela de Revisão de Simulado foi desenvolvida exatamente conforme o protótipo.
+* A barra de progresso por questão e os filtros de categoria e estado respondem interativamente.
+* A exibição detalhada das respostas (acertos, erros e questões em branco com gabarito) está totalmente funcional.
+* O botão ""Refazer só os erros"" e a integração de dados com o back-end foram concluídos e aprovados nos testes.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:0f,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:58 PM,10948,TR-355,Simulado
+Simulados,TR-409,11002,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 7:44 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela interna de gestão e histórico de Simulados (Plano Premium), englobando os cards de estatísticas gerais, os filtros de busca/ordenação, a listagem de simulados realizados com o detalhe de acertos por categoria e as opções de revisão ou refacção.
+
+h2. Escopo
+
+* Desenvolvimento do layout front-end da dashboard de simulados, incluindo os indicadores superiores (Simulados feitos, Questões respondidas, Aproveitamento médio e Melhor categoria).
+* Implementação dos filtros de pesquisa (""Vestibular: todos"" e opções de ordenação) e do botão de ação rápida para criação de novos testes.
+* Construção da listagem de histórico de simulados concluídos, exibindo a percentagem de acertos, datas, duração, etiquetas de matérias e contagem de acertos/erros (ex: Simulado ENEM e Vestibular UEM).
+* Criação das barras de progresso e detalhamento de desempenho divididas por categoria (ex: Matemática, Biologia, Química, etc.) para cada simulado.
+* Integração com os endpoints de back-end para recuperação do histórico de provas do usuário e métricas consolidadas.
+* Realização de testes de interface, responsividade e validação das rotinas de navegação para revisão e refacção.
+
+h2. Está pronto quando
+
+* A interface da tela interna de Simulados foi desenvolvida exatamente conforme o protótipo.
+* Os cartões de métricas gerais e a listagem de simulados concluídos com barras de progresso por categoria estão funcionais.
+* Os filtros de vestibular e as opções de ordenação respondem corretamente às interações do usuário.
+* A integração de dados com o back-end e os testes da tela foram concluídos com sucesso.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,0,38880,,,0|i0010n:0i,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 7:44 PM,10948,TR-355,Simulado
+Cronometro,TR-356,10949,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,26/out/26 1:03 AM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de cronómetro e métricas de desempenho, fornecendo um dashboard analítico detalhado com o acompanhamento do tempo de estudo, histórico de ofensivas, métricas por configuração de simulado e ritmo por matéria.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end do dashboard de cronómetro, incluindo os cartões de resumo (tempo total, tempo médio por questão, média diária e ofensiva atual)[cite: 6].
+* Implementação do componente de ""Quadro de ofensivas"" (mapa de calor/heatmap de dias estudados) e dos gráficos de horas por semana[cite: 6].
+* Construção das secções de detalhe analítico, como o ""Tempo por configuração"" (provas rápidas, médias e longas) e o ""Ritmo por categoria"" (matérias como Física, Química, Matemática e Português)[cite: 6].
+* Integração com o back-end para recolha, cálculo dinâmico e filtragem temporal (7 dias, último mês, último ano) dos dados de estudo do utilizador[cite: 6].
+* Realização de testes integrados e validação da precisão das métricas exibidas no painel.
+
+h2. Está pronto quando
+
+* A interface do dashboard analítico de cronómetro foi desenvolvida e está visualmente alinhada com os padrões de design[cite: 6].
+* Os componentes de métricas, quadro de ofensivas, gráficos semanais e ritmo por categoria estão a exibir corretamente os dados[cite: 6].
+* A integração com o back-end para suporte aos filtros temporais e cálculo dos tempos médios está funcional[cite: 6].
+* Os testes da tela e dos fluxos de visualização analítica foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 12 a 24 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:0r,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,26/out/26 1:03 AM,10948,TR-355,Simulado
+Ranking,TR-357,10950,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,26/out/26 1:03 AM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de ranking da plataforma, englobando a construção da interface de classificação e a integração com o back-end para o cálculo e rastreio da posição do utilizador com base nas notas dos simulados.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end para exibição da tabela de classificação geral e por categorias/simulados.
+* Implementação da lógica de comunicação com o back-end para calcular, ordenar e recuperar o rank e a pontuação do utilizador.
+* Realização de testes integrados e validação da precisão dos dados exibidos no ranking.
+
+h2. Está pronto quando
+
+* A interface da tela de ranking foi desenvolvida e está visualmente alinhada com os padrões.
+* A integração com o back-end para rastreio de posição com base nas notas dos simulados está funcional.
+* Os testes da tela e da exibição das pontuações foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:0v,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,26/out/26 1:03 AM,10948,TR-355,Simulado
+Simulado Questoes,TR-414,11007,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,27/out/26 8:04 PM,11/nov/26 3:16 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de resolução ativa de questões do simulado, englobando o cabeçalho superior escuro (com o título do simulado, cronômetro regressivo por questão e botão ""Salvar e sair""), a barra de progresso detalhada com paginação numérica de questões, o enunciado com tags temáticas, as alternativas de múltipla escolha (A a E) e os botões de controle de navegação (""Questão anterior"", ""Deixar em branco"" e ""Responder e avançar"").
+
+h2. Escopo
+
+* Desenvolvimento do layout front-end da barra de cabeçalho (header) do simulado, contendo a identificação do teste, o cronômetro regressivo em tempo real e a ação de salvamento e saída.
+* Construção da barra de progresso de questões, incluindo a barra de progresso percentual, o contador de status (respondidas, em branco, restantes) e a grade numérica de navegação rápida entre as questões (1 a 20) com marcação de estados.
+* Implementação dos blocos de etiquetas temáticas (matéria e tópico, ex: Matemática, Função quadrática, ENEM 2024).
+* Criação do componente de exibição do enunciado e das alternativas de múltipla escolha (A, B, C, D, E), permitindo a seleção da resposta e indicando visualmente a escolha do usuário.
+* Estruturação do rodapé com os botões de ação dinâmica (""Questão anterior"", ""Deixar em branco"", ""Responder e avançar"") e a mensagem de apoio informando que é possível retornar em qualquer questão antes de finalizar.
+* Integração com os endpoints de back-end para salvamento automático da resposta selecionada, controle do tempo limite por questão e avanço para o próximo item.
+* Realização de testes de interface, responsividade, funcionamento do cronômetro regressivo e navegação entre as questões do simulado.
+
+h2. Está pronto quando
+
+* A interface da tela de resolução de questões e o seu header específico foram desenvolvidos exatamente conforme o protótipo.
+* O cronômetro regressivo por questão e o botão ""Salvar e sair"" estão operacionais.
+* A barra de progresso numérica e a marcação de status (respondidas, em branco e restantes) respondem dinamicamente às interações.
+* A seleção de alternativas, os botões de navegação e o salvamento das respostas com o back-end foram testados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 16 a 24 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i0010n:1p,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,25.0,,,,{},,Itens Pendentes,27/out/26 8:04 PM,10948,TR-355,Simulado
+Pagina inicial,TR-380,10973,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,26/out/26 9:43 PM,11/nov/26 3:24 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da Página Inicial da plataforma SAUF BR, criando a interface de apresentação, os blocos de destaque institucionais e os atalhos dinâmicos de navegação para os módulos principais do sistema.
+
+h2. Escopo
+
+* Desenvolvimento do layout front-end da página inicial, seguindo o design system e a prototipagem de UI/UX.
+* Implementação de seções informativas, banners de destaque e componentes de acesso rápido (atalhos para cursos, simulados, teste vocacional e calendário).
+* Integração com o back-end para exibição de conteúdos dinâmicos ou saudação personalizada caso o usuário esteja autenticado.
+* Realização de testes de responsividade, usabilidade e validação de links e rotas da página.
+
+h2. Está pronto quando
+
+* A interface da página inicial foi desenvolvida e está totalmente responsiva conforme o design.
+* Todos os atalhos e seções de redirecionamento para os módulos do sistema estão funcionais.
+* A integração de dados com o back-end (quando aplicável) foi validada.
+* Os testes da tela foram concluídos e aprovados sem bugs visuais ou de navegação.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,36120,,,0|i001bb:0ar,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,30.0,,,,{},,Itens Pendentes,26/out/26 9:43 PM,10972,TR-379,Pagina inicial
+Tela de Assinaturas,TR-325,10918,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev7,Dev8,Dev5,Dev6,Dev5,Dev6,22/out/26 5:05 PM,11/nov/26 3:07 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de gerenciamento de assinatura do usuário, englobando desde a estruturação visual no front-end até a integração com os endpoints de back-end e validações de fluxo.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end da tela de gerenciamento de assinatura conforme o design e os requisitos.
+* Implementação da lógica de comunicação com o back-end para consulta, alteração, cancelamento ou renovação de planos.
+* Realização de testes integrados e validação dos cenários de uso (sucesso, estados da assinatura e tratamento de erros).
+
+h2. Está pronto quando
+
+* -A interface da tela de assinatura foi desenvolvida e está visualmente alinhada com os padrões.-
+* A integração com o back-end para o gerenciamento do ciclo da assinatura está funcional.
+* Os testes da tela e dos fluxos associados foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 16 horas
+
+h2. Cenários de Teste
+
+*Listar planos*
+
+* Listar planos disponíveis
+* Listar planos sem ter assinatura
+
+*Consultar assinatura*
+
+* Consultar sem assinatura
+* Consultar assinatura ativa
+* Consultar cancelamento agendado
+* Consultar assinatura vencida
+* Consultar no último dia de vigência
+* Consultar sem expor o histórico
+
+*Assinar*
+
+* Assinar plano válido
+* Reassinar após vencer
+* Evitar duplo clique ao assinar
+* Pagamento simulado
+
+*Trocar de plano*
+
+* Trocar para outro plano
+* Trocar para o mesmo plano
+* Trocar com cancelamento agendado
+* Trocar sem assinatura vigente
+
+*Cancelar*
+
+* Cancelar assinatura ativa
+* Cancelar duas vezes
+* Cancelar sem assinatura
+* Fim do período após cancelamento
+
+*Reativar*
+
+* Reativar antes do fim
+* Reativar sem estar agendado
+* Reativar sem assinatura vigente
+
+*Vigência e fuso*
+
+* Vencimento sem renovação automática
+* Vigência no fuso America/Sao_Paulo
+* Renovação com pagamento confirmado
+
+*Acesso aos simulados*
+
+* Acesso sem login
+* Acesso sem assinatura
+* Acesso com assinatura vigente
+* Estado de carregamento da assinatura
+* Decisão de acesso pelo resultado da API
+
+*Erros*
+
+* Mensagem de erro 409 no front
+* Falha de rede
+* Formato padrão de erro",,Dev5,Dev3,Dev6,Dev4,[TR-325]: Tela de Assinaturas;06/nov/26 10:00 AM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;4140,,,0,4140,,,0,41820,,,0|i001bb:0g,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},"27/out/26 9:03 PM;712020:841ce7df-0129-426a-a700-aa6a12826421;[~accountid:712020:600f1a39-9e66-443d-8a20-ad6551411bfa] , boas mudanças. Retorno apenas no Frontend",Em andamento,27/out/26 7:46 PM,10917,TR-324,Usuario
+Universidades ,TR-330,10923,Tarefa,Em Revisão 1,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,22/out/26 5:35 PM,11/nov/26 3:10 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de listagem de universidades, englobando desde a construção da interface visual no front-end até a integração com os endpoints de back-end para consulta e filtragem das instituições.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end para exibição da listagem de universidades, incluindo componentes de busca, filtros e paginação (se aplicável).
+* Implementação da lógica de comunicação com o back-end para recuperação dos dados das instituições de ensino.
+* Realização de testes integrados e validação dos cenários de listagem, estados de carregamento e tratamento de erros.
+
+h2. Está pronto quando
+
+* -A interface da tela de listagem de universidades foi desenvolvida e está visualmente alinhada com os padrões.-
+* A integração com o back-end para consulta e filtragem das universidades está funcional.
+* Os testes da tela e dos fluxos associados foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,88800,,,0|i001bb:0li,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,45.0,,,,{},,Em andamento,27/out/26 9:41 AM,10922,TR-329,Universidades
+Universidades Favoritas,TR-417,11010,Tarefa,Em Revisão 1,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,27/out/26 8:18 PM,11/nov/26 3:08 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da aba de Universidades dentro da tela de ""Meus Favoritos"", englobando o filtro de ordenação por nota MEC, o botão de ação em lote para comparação (""Comparar universidades""), a listagem de instituições salvas com detalhes de categoria (pública/privada), campi, modalidade, Nota MEC, contagem de cursos, além do painel lateral de comparação rápida de cursos e o widget de alerta de processos seletivos.
+
+h2. Escopo
+
+* Desenvolvimento do layout front-end da aba ""Universidades 3"", incluindo o menu de ordenação superior (""Ordenar: Nota MEC"") e o botão de ação em massa para comparação de instituições.
+* Implementação dos cards de universidades salvas (ex: Universidade Estadual de Maringá, UniCesumar, UTFPR), exibindo logótipo, selo de instituição (Pública/Privada), número de campi, modalidades (presencial, EaD), nota MEC, quantidade total de cursos.
+* Construção da funcionalidade de seleção de múltiplos itens e botões de ação individual por card (""Ver universidade"" e ""Remover"").
+* Desenvolvimento do painel lateral de ""Comparação rápida"" focado na quantidade de cursos por universidade e indicadores geográficos (ex: proximidade em quilômetros).
+* Criação do card lateral de ""Alerta de processos seletivos"" com chave de ativação para avisos de abertura de inscrições e editais.
+* Implementação da barra de notificação inferior temporária (""Snackbar"") com a opção de ""Desfazer"" para itens recentemente removidos (ex: PUCPR).
+* Integração com os endpoints de back-end para gerenciamento das universidades favoritas, sincronização de dados institucionais e o motor de comparação rápida.
+* Realização de testes de interface, responsividade, ordenação e fluxos de interação com os cards e alertas.
+
+h2. Está pronto quando
+
+* -A interface da aba de Universidades em Meus Favoritos foi desenvolvida exatamente conforme o protótipo.-
+* O seletor de ordenação e a seleção de múltiplos itens para comparação funcionam de maneira interativa.
+* Os cartões de universidades exibem corretamente as notas MEC, contagem de cursos, modalidades e os avisos de prazos/programas.
+* O painel lateral de comparação rápida, o controle de alertas de processos seletivos e a notificação de desfazer remoção estão totalmente operacionais e integrados ao back-end.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,0,10260,,,0|i001bb:1,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,04/nov/26 11:28 PM,10917,TR-324,Usuario
+Cursos Favoritos ,TR-416,11009,Tarefa,Em Revisão 1,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,27/out/26 8:17 PM,11/nov/26 3:07 PM,,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de cursos da tela de ""Meus Favoritos"", englobando as abas de navegação entre Cursos e Universidades, a listagem dos itens salvos com detalhes de modalidade, instituição, notas de corte, valores de mensalidade, avisos de prazos, botões de ação (""Ver curso"" e ""Remover""), o painel lateral de comparação rápida, o widget de alertas de prazos e o snackbar flutuante para desfazer remoções.
+
+h2. Escopo
+
+* Desenvolvimento do layout front-end da página de favoritos, incluindo o cabeçalho e as abas de separação (""Cursos"" e ""Universidades"").
+* Implementação dos cards de cursos salvos (ex: Biomedicina, Medicina, Enfermagem, Fisioterapia), contendo foto, títulos de modalidade (Bacharelado, Presencial/Semipresencial), localização da universidade, duração em semestres, notas de corte Sisu ou mensalidades, e alertas de prazos específicos.
+* Construção da funcionalidade de seleção múltipla de cursos e botões de ação individual por card (""Ver curso"" e ""Remover"").
+* Desenvolvimento do painel lateral de ""Comparação rápida"" exibindo as notas dos cursos favoritos comparados com a média do ENEM do usuário.
+* Criação do card lateral de ""Alerta de prazos"" com o botão de ativar/desativar notificações por e-mail para os favoritos.
+* Implementação da barra inferior temporária de notificação (""Snackbar"") com a opção de ""Desfaz"" ao remover um item (ex: Nutrição).
+* Integração com os endpoints de back-end para gerenciamento dos favoritos do usuário, sincronização de prazos e cálculo comparativo de notas.
+* Realização de testes de interface, responsividade e validação do fluxo de navegação e remoção de favoritos.
+
+h2. Está pronto quando
+
+* -A interface da tela de Meus Favoritos foi desenvolvida exatamente conforme o protótipo.-
+* As abas de navegação (Cursos e Universidades) e os cards interativos exibem corretamente as informações e alertas de prazos.
+* O painel lateral de comparação rápida e o card de controle de alertas de prazos estão funcionais.
+* A ação de remoção com o aviso flutuante de desfazer e a integração com o back-end foram testadas e aprovadas.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 14 a 22 horas",,Dev5,,Dev6,,,,,,,,,0,7320,,,0|i001bb:11,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Em andamento,05/nov/26 11:31 AM,10917,TR-324,Usuario
+[BE]Desenvolvimento Scraper Calendário,TR-338,10931,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,22/out/26 6:01 PM,11/nov/26 2:39 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+
+Desenvolver, configurar e testar a rotina de _scraping_ responsável por extrair e absorver as informações do calendário académico das fontes externas, estruturando os dados para alimentar o back-end e a base de dados do projeto.
+
+h2. Escopo
+
+* Mapeamento das páginas e fontes de dados de onde o calendário será extraído.
+* Implementação do script de _scraping_ (em Python ou linguagem adotada no projeto) para recolha automática de datas, prazos e eventos.
+* Tratamento, limpeza e estruturação dos dados recolhidos para armazenamento no banco de dados e suporte ao back-end.
+* Realização de testes de execução do script e validação da integridade das informações extraídas.
+
+h2. Está pronto quando
+
+* O scrapper foi desenvolvido e executa com sucesso a recolha dos dados do calendário.
+* Os dados extraídos encontram-se limpos, estruturados e salvos corretamente no banco de dados.
+* Os testes de validação da rotina de extração foram concluídos e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 6 a 12 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i001bb:15,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,15.0,,,,{},,Itens Pendentes,22/out/26 6:01 PM,10665,TR-158,Scrapings
+Meu Acompanhamento,TR-415,11008,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,27/out/26 8:11 PM,11/nov/26 3:07 PM,,,13/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de ""Meu Acompanhamento"" (Plano Premium), englobando os cartões de indicadores superiores, os filtros temporais e por vestibular, o gráfico de evolução do aproveitamento, o gráfico de acertos e erros, o detalhamento de acertos por categoria com variação mensal, o painel de recomendações ""Onde focar agora"" e o histórico de constância de estudo.
+
+h2. Escopo
+
+* Desenvolvimento do layout front-end da dashboard de acompanhamento, incluindo os filtros superiores (seletor de período: 7 dias, último mês, último ano; e filtro de vestibular).
+* Implementação dos cartões de métricas principais no topo: Aproveitamento médio, Questões respondidas, Simulados concluídos e Acertos totais, com exibição de variação percentual/absoluta em relação ao período anterior.
+* Construção do gráfico de barras de ""Evolução do aproveitamento"" ao longo das datas, com comparativo de progresso e texto descritivo de evolução.
+* Criação do componente de ""Acertos e erros"" (gráfico de rosca/donut) e a tabela comparativa ao mês anterior.
+* Implementação da seção de ""Acertos por categoria"" com barras de progresso horizontais, percentuais de aproveitamento e indicadores de variação, além do atalho ""Ver questões erradas"".
+* Desenvolvimento do painel lateral de recomendações ""Onde focar agora"" (focando em pontos fracos, questões em branco) com o botão de ação rápida ""Criar simulado de [matéria]"".
+* Criação do bloco de ""Constância de estudo"" exibindo o gráfico de barras por semanas e o contador de dias estudados no mês.
+* Integração com os endpoints de back-end para computação e recuperação de todas as estatísticas, gráficos e histórico do usuário.
+* Realização de testes de interface, responsividade e validação do comportamento dos filtros temporais e de vestibulares.
+
+h2. Está pronto quando
+
+* A interface da tela de Meu Acompanhamento foi desenvolvida exatamente conforme o protótipo.
+* Os filtros temporais e de vestibulares atualizam dinamicamente os dados exibidos nos gráficos e cartões.
+* Todos os gráficos de evolução, acertos/erros, desempenho por categoria e constância de estudo estão interativos e funcionais.
+* O painel ""Onde focar agora"" com o botão de criação rápida de simulado direciona corretamente o fluxo do usuário.
+* A integração de dados com o back-end e os testes da tela foram concluídos com sucesso.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 18 a 28 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i001bb:3,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Itens Pendentes,27/out/26 10:03 PM,10917,TR-324,Usuario
+Implementar integração de pagamento e checkout via Stripe,TR-336,10929,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev9,Dev10,Dev5,Dev6,Dev5,Dev6,22/out/26 5:51 PM,11/nov/26 3:12 PM,03/nov/26 8:17 PM,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Configurar e implementar a integração completa com o gateway de pagamento Stripe, englobando a criação de rotinas no back-end, fluxos de checkout e tratamento de webhooks para processamento de transações e assinaturas.
+
+h2. Escopo
+
+* Configuração das chaves de API, webhooks e ambientes de teste/produção do Stripe no back-end.
+* Desenvolvimento dos endpoints e lógica de negócio para criação de sessões de checkout, processamento de pagamentos e gestão de assinaturas.
+* Implementação da interface e dos fluxos de pagamento no front-end, incluindo o tratamento de retornos de sucesso e erros da transação.
+* Realização de testes de integração e validação dos cenários de pagamento com cartões de teste do Stripe.
+
+h2. Está pronto quando
+
+* A integração oficial com o Stripe está configurada e funcional no ambiente de desenvolvimento/homologação.
+* Os fluxos de checkout e processamento de pagamentos/assinaturas foram implementados de ponta a ponta (front-end e back-end).
+* Os webhooks do Stripe foram configurados e atualizam corretamente o estado das assinaturas/pedidos no sistema.
+* Os testes de transação foram executados e aprovados com sucesso.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 5 a 10 horas",,Dev5,,Dev6,,,,,,,,,0,8220,,,0|i001bb:3v,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,20.0,,,,{},,Em andamento,27/out/26 8:15 PM,10928,TR-335,Sistema de Pagamento
+Universidades visão geral,TR-331,10924,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Medium,,Dev11,Dev12,Dev5,Dev6,Dev5,Dev6,22/out/26 5:35 PM,11/nov/26 3:11 PM,,,15/nov/26 12:00 AM,0,"h2. O que fazer
+
+Implementar o ciclo de vida completo da tela de visão geral de uma universidade, abrangendo a estruturação da interface de detalhes, consumo de dados específicos da instituição e respetivas interações do utilizador.
+
+h2. Escopo
+
+* Desenvolvimento da interface front-end para a página de detalhes/visão geral da universidade selecionada.
+* Implementação da lógica de comunicação com o back-end para recuperar informações detalhadas da instituição (como cursos oferecidos, localização, contactos e indicadores).
+* Realização de testes integrados e validação da navegação a partir da listagem até à visão geral.
+
+h2. Está pronto quando
+
+* -A interface da tela de visão geral da universidade foi desenvolvida e exibe corretamente os dados detalhados.-
+* A integração com o back-end para obtenção das informações específicas da instituição está funcional.
+* Os testes da tela e da transição de rotas foram executados e aprovados.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 8 a 16 horas",,Dev5,,Dev6,,,,,,,,,0,20520,,,0|i001bb:3x,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,30.0,,,,{},,Em andamento,30/out/26 7:27 PM,10922,TR-329,Universidades
+Finalização dos scrapers das universidades,TR-424,11017,Tarefa,Concluído,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,Itens concluídos,Dev3,Dev4,Dev5,Dev6,Dev5,Dev6,31/out/26 3:52 PM,11/nov/26 2:40 PM,,11/nov/26 9:07 AM,15/nov/26 12:00 AM,0,"h2. O que fazer
+
+Desenvolver, finalizar e validar os scripts de _scraping_ para a recolha automatizada de dados das universidades selecionadas (UEM, UEL, UFSC, UTFPR e UFSM), garantindo a persistência correta das informações na base de dados e o suporte ao backend da plataforma.
+
+h2. Escopo
+
+* Desenvolvimento e ajuste final dos scrapers específicos para os portais das instituições priorizadas: UEM, UEL, UFSC, UTFPR e UFSM.
+* Implementação de rotinas de tratamento de erros, limpeza de dados recolhidos e paginação para lidar com as peculiaridades estruturais de cada site universitário.
+* Execução de testes de carga e extração para assegurar a integridade dos dados obtidos (como cursos, grades e calendários).
+* Integração e persistência automatizada dos dados extraídos no banco de dados do projeto.
+
+h2. Está pronto quando
+
+* Os scripts de scraping para UEM, UEL, UFSC, UTFPR e UFSM foram finalizados e testados individualmente.
+* A extração de dados ocorre sem falhas críticas de bloqueio ou corrupção de informações.
+* -Os dados recolhidos estão a ser persistidos corretamente na base de dados.-
+* Os testes de homologação dos scrapers foram executados e aprovados pela equipa.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 16 a 32 horas",,Dev5,,Dev6,,[TR-424]: Finalização dos scrapers das universidades;01/nov/26 11:03 AM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;3600,[TR-424]: Finalização dos scrapers das universidades;07/nov/26 12:20 AM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;6360,,0,9960,,,0,9960,,,0|i001bb:f,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,4.0,,,,{},,Itens concluídos,11/nov/26 9:07 AM,10665,TR-158,Scrapings
+Organização Jira Transição,TR-315,10908,Tarefa,Concluído,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,Itens concluídos,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,21/out/26 8:51 PM,10/nov/26 3:46 PM,,09/nov/26 1:39 AM,18/nov/26 12:00 AM,0,"h2. O que fazer
+
+Revisar, padronizar e atualizar todos os cards antigos e da sprint atual no Jira (seguindo o modelo simplificado de histórias, tarefas e bugs), além de garantir que estejam devidamente estruturados e conectados aos seus respectivos épicos ativos.
+
+h2. Por quê
+
+Garantir a rastreabilidade correta do projeto, manter o board limpo e atualizado após a review, e assegurar que todos os itens reflitam fielmente o escopo executado ou planejado.
+
+h2. Está pronto quando
+
+* -Todos os cards antigos e da sprint atual foram revisados e ajustados para o padrão simplificado (títulos, descrições e subtarefas).-
+* -Cada card está corretamente vinculado ao seu respectivo épico ativo.-
+* -Os status e as labels (como {{frontend}} ou {{backend}}) estão corretos e atualizados.-",,Dev5,,Dev6,,,,,,,,,0,66000,,,0|i001bb:i,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,25.0,,,,{},,Itens concluídos,09/nov/26 1:39 AM,10906,TR-313,Organização projeto
+Organizar Repositorio,TR-432,11025,Tarefa,Concluído,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,Itens concluídos,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,01/nov/26 11:03 AM,10/nov/26 3:46 PM,,09/nov/26 12:40 AM,09/nov/26 12:00 AM,0,"h2. O que fazer
+
+Estruturar, organizar e centralizar toda a documentação oficial e exigida pelo projeto (como diagramas, ADRs, termos e especificações) dentro do repositório de forma limpa, acessível e padronizada.
+
+h2. Escopo
+
+* Criação e organização de uma árvore de pastas dedicada à documentação (ex: pasta {{/docs}} ou diretórios específicos por módulo/artefato) no repositório do projeto.
+* Movimentação, revisão e padronização dos ficheiros de documentação (como diagramas, relatórios, especificações técnicas e decisões arquiteturais).
+* Atualização do {{README.md}} principal do repositório para incluir um índice claro e links diretos para a documentação essencial do projeto.
+* Realização de revisão para garantir que todos os artefatos exigidos academicamente e tecnicamente estão presentes e acessíveis.
+
+h2. Está pronto quando
+
+* -A estrutura de pastas de documentação está organizada e implementada no repositório.-
+* -Todos os artefatos exigidos pelo projeto foram devidamente alocados nos respetivos diretórios.-
+* -O {{README.md}} foi atualizado com o mapa e acessos rápidos para a documentação.-
+* -A organização foi validada e partilhada com a equipa.-
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 4 a 8 horas",,Dev5,,Dev6,,,,,,,,,7200,7560,,,0|i001rg:zvr,,,,,,,,,,,,,,,,,,,,Sprint 6,Sprint 7,,,,5.0,,,,{},,Itens concluídos,09/nov/26 12:40 AM,10615,TR-133,Artefatos
+Organização das dailies ,TR-456,11081,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,09/nov/26 12:39 AM,11/nov/26 2:49 PM,,,16/nov/26 12:00 AM,0,"h2. O que fazer
+
+Estruturar o formato oficial das reuniões diárias (dailies), regularizando o registo retroativo e a contabilização de horas de alinhamento previamente não computadas no projeto.
+
+h2. Escopo
+
+* Definição da estrutura e do fluxo padrão para a realização das dailies da equipa.
+* Levantamento, reconciliação e registo retroativo das horas de alinhamento e reuniões não contabilizadas anteriormente.
+* Atualização dos registos de tempo e alinhamento dos apontamentos no gestor de projetos.
+
+h2. Está pronto quando
+
+* A estrutura oficial da cerimónia de daily foi definida e comunicada à equipa.
+* O histórico de horas retroativas foi contabilizado e integrado nos registos do projeto.
+* Os dados de alinhamento estão atualizados e corretos.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 2 a 4 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i001rg:zyg,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,2.0,,,,{},,Itens Pendentes,09/nov/26 12:39 AM,10906,TR-313,Organização projeto
+Planning Sprint 7,TR-443,11036,Tarefa,Em andamento,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,Low,,,,Dev5,Dev6,Dev5,Dev6,04/nov/26 8:28 PM,11/nov/26 3:00 PM,04/nov/26 9:21 PM,,14/nov/26 12:00 AM,0,"h2. O que fazer
+
+Conduzir a reunião de planeamento da sprint com a equipa, selecionando e comprometendo os itens do backlog para o próximo ciclo de entrega.
+
+h2. Escopo
+
+* Alinhamento de objetivos e prioridades da sprint.
+* Seleção e dimensionamento dos itens/cartões do backlog.
+* Atribuição de tarefas e validação da capacidade da equipa.
+
+h2. Está pronto quando
+
+* -O objetivo da sprint foi definido e acordado.-
+* -Os cartões foram estimados, priorizados e adicionados ao sprint backlog.-
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 2 a 4 horas",,Dev5,,Dev6,,[TR-443]: Planning Sprint 7;04/nov/26 9:43 PM;ug:59b8b693-5ac6-43e1-9168-9b752bafd6bd;7200,,,0,7200,,,0,30600,,,0|i001rg:zyx,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,15.0,,,,{},,Em andamento,04/nov/26 10:47 PM,10913,TR-320,Cerimônias do SCRUM
+Desenvolvimento do agente de gestão de projetos,TR-294,10887,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,,,Dev1,Dev2,Dev1,Dev2,15/out/26 8:25 PM,11/nov/26 3:01 PM,,,13/nov/26 12:00 AM,0,,,Dev1,,Dev2,,,,,,,,,,,,,0|i001rh:,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,5.0,,,,{},,Itens Pendentes,15/out/26 8:25 PM,10914,TR-321,Desenvolvimento de ferramentas 
+Elaboração do Cronograma,TR-470,11095,Tarefa,Tarefas pendentes,TR,Escola de TI - SAUF BR,software,Dev1,Dev2,,High,,Dev5,Dev6,Dev5,Dev6,Dev5,Dev6,11/nov/26 2:32 PM,12/nov/26 10:54 AM,,,,0,"h2. O que fazer
+
+Elaborar, detalhar e estruturar o cronograma oficial do projeto, definindo prazos, marcos (milestones), distribuição de épicos e o planeamento temporal das entregas e sprints.
+
+h2. Escopo
+
+* Mapeamento das datas de início e conclusão para cada épico, módulo e grande entrega do projeto.
+* Estruturação do calendário das sprints, alinhando a capacidade da equipa com a carga de trabalho estimada.
+* Registo e comunicação do cronograma oficial para alinhar expectativas com os intervenientes e partes interessadas.
+
+h2. Está pronto quando
+
+* O cronograma detalhado do projeto foi elaborado e documentado.
+* As datas de marcos principais e sprints estão definidas e sincronizadas no gestor de projetos.
+* O plano temporal foi validado e partilhado com a equipa.
+
+h2. Estimativa de Tempo
+
+* *Esforço estimado:* 4 a 8 horas",,Dev5,,Dev6,,,,,,,,,,,,,0|i002o2:,,,,,,,,,,,,,,,,,,,,Sprint 7,,,,,8.0,,,,{},,Itens Pendentes,11/nov/26 2:32 PM,10906,TR-313,Organização projeto
